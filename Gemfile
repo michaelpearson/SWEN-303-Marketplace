@@ -7,9 +7,6 @@ gem 'puma', '~> 3.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 
-group :development, :test do
-  gem 'pry-rails'
-end
 
 group :development do
   gem 'web-console'
