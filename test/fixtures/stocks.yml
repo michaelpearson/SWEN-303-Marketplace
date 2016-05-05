@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  owner: 
+  label: MyString
+  price: 9.99
+  quantity: 1
+
+two:
+  owner: 
+  label: MyString
+  price: 9.99
+  quantity: 1
