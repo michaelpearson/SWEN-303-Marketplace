@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SWEN303Marketplace</title>
+    <title>Wow. Much marketplace</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
-
   <body>
-    <%= yield %>
+    <div class="header row vcenter">
+      <div class="col-md-3 col-sm-0">
+
+      </div>
+      <div class="col-md-6 col-sm-9">
+        <div class="title">
+          <h1>SWEN 303 Marketplace</h1>
+        </div>
+        <div class="search-box col-sm-12">
+          <form action="/search" method="get" class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="query">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                Search
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-3 vcenter">
+        <div class="btn-group">
+          <a class="btn btn-primary">Signup</a>
+          <a class="btn btn-success">Login</a>
+        </div>
+      </div>
+    </div>
+    <div class="row content-outer">
+      <div class="col-xs-0 col-md-1"></div>
+      <div class="col-xs-12 col-md-10">
+        <%= yield %>
+      </div>
+      <div class="col-xs-0 col-md-1"></div>
+    </div>
   </body>
 </html>
