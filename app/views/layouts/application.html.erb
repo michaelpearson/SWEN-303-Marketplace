@@ -31,7 +31,7 @@
 
       <div class="col-md-3 col-sm-3 vcenter">
         <div class="btn-group">
-          <a class="btn btn-primary">Signup</a>
+          <%= link_to "Signup", signup_path, class: "btn btn-primary" %>
           <%=
             link_to_unless(logged_in?, "Login", login_path, class: "btn btn-success") do
               link_to "Logout", logout_path, class: "btn btn-success"

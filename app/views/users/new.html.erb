@@ -1,0 +1,13 @@
+<%= render 'shared/alert' if @alert %>
+<%= form_for(@user) do |f| %>
+  <%= f.label :real_name %>
+  <%= f.text_field :realname%>
+  <br>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+  <br>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <br>
+  <%= f.submit %>
+<% end %>
