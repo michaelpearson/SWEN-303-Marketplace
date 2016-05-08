@@ -1,0 +1,7 @@
+<%= render 'shared/alert' if @alert %>
+
+<%= form_for(:session, url: login_path) do |f| %>
+  <%= f.text_field :username %>
+  <%= f.password_field :password %>
+  <%= f.submit "Login" %>
+<% end %>
