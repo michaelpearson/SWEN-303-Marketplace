@@ -1,7 +1,19 @@
 <%= render 'shared/alert' if @alert %>
 
-<%= form_for(:session, url: login_path) do |f| %>
-  <%= f.text_field :username %>
-  <%= f.password_field :password %>
-  <%= f.submit "Login" %>
-<% end %>
+<div class="container panel panel-default">
+  <%= form_for :session, url: login_path, html: {class: "form-horizontal panel-body"} do |f| %>
+    <div class="form-group">
+      <%= f.label :user_name, {class: "col-md-2 col-sm-2 form-label"} %>
+      <div class="col-lg-4 col-md-6 col-sm-8">
+        <%= f.text_field :username , {class: "form-control", placeholder: :user_name }%>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :password, {class: "col-md-2 col-sm-2 form-label"} %>
+      <div class="col-lg-4 col-md-6 col-sm-8">
+        <%= f.password_field :password , {class: "form-control", placeholder: :password }%>
+      </div>
+    </div>
+    <%= f.submit "Login", {class: "btn btn-default" } %>
+  <% end %>
+</div>
