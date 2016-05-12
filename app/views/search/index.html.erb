@@ -1,0 +1,9 @@
+<h2><%=@results.length%> Results found for "<%=@search_query%>"</h2>
+<%@results.each do |result|%>
+  <ul>
+    <li><a><%= result[:title] %></a></li>
+    <li><a><%= result[:description] %></a></li>
+    <li><a><%= result[:stock_id] %></a></li>
+    <li><a><%= result[:price] %></a></li>
+    <li><%= image_tag result[:image] %></ul>
+<%end%>
