@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :transactions
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy'
