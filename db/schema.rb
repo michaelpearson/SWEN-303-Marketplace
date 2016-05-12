@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505041722) do
+ActiveRecord::Schema.define(version: 20160512023220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "photos", force: :cascade do |t|
+    t.integer  "stock_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["stock_id"], name: "index_photos_on_stock_id", using: :btree
+  end
 
   create_table "stocks", force: :cascade do |t|
     t.string   "label"
@@ -43,6 +54,7 @@ ActiveRecord::Schema.define(version: 20160505041722) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "photos", "stocks"
   add_foreign_key "stocks", "users", column: "owner_id"
   add_foreign_key "transactions", "stocks"
   add_foreign_key "transactions", "users"

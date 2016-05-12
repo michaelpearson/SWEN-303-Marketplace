@@ -14,6 +14,7 @@ class StocksController < ApplicationController
   # GET /stocks/new
   def new
     @stock = Stock.new
+    @stock.photos.build
   end
 
   # GET /stocks/1/edit
@@ -28,6 +29,10 @@ class StocksController < ApplicationController
     @stock = Stock.new(stock_params)
     @stock.owner = current_user
     if @stock.save
+      @stock.photos = @stock.photos || []
+      params[:photos][:image].each do |photo|
+        @stock.photos.create!(image: photo)
+      end
       redirect_to @stock, notice: 'Stock was successfully created.'
     else
       render :new
@@ -36,11 +41,23 @@ class StocksController < ApplicationController
 
   # PATCH/PUT /stocks/1
   def update
+    puts "
+
+    #{params.inspect}
+
+    "
     unless logged_in @stock.owner
       redirect_to stocks_url, :alert => "Access denied."
     end
-
+    
     if @stock.update(stock_params)
+      @stock.photos = @stock.photos || []
+      params[:photos][:image].each do |photo| 
+        p = Photo.new
+        p.image = photo
+        p.save
+        @stock.photos << p
+      end
       redirect_to @stock, notice: 'Stock was successfully updated.'
     else
       render :edit
@@ -62,6 +79,6 @@ class StocksController < ApplicationController
   end
 
   def stock_params
-    params.require(:stock).permit(:label, :price, :quantity)
+    params.require(:stock).permit(:label, :price, :quantity, photo_attributes: [:image])
   end
 end
