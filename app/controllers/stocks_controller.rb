@@ -1,5 +1,6 @@
 class StocksController < ApplicationController
   include SessionsHelper
+  include ApplicationHelper
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
 
   # GET /stocks
@@ -41,18 +42,13 @@ class StocksController < ApplicationController
 
   # PATCH/PUT /stocks/1
   def update
-    puts "
-
-    #{params.inspect}
-
-    "
     unless logged_in @stock.owner
       redirect_to stocks_url, :alert => "Access denied."
     end
-    
+
     if @stock.update(stock_params)
       @stock.photos = @stock.photos || []
-      params[:photos][:image].each do |photo| 
+      params[:photos][:image].each do |photo|
         p = Photo.new
         p.image = photo
         p.save
@@ -62,6 +58,20 @@ class StocksController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def bid
+    if logged_in? && Stock.find_by(id: params[:id]).has_not_met_required_bids?
+      transaction = Transaction.create(
+        user: current_user,
+        stock: Stock.find_by(id: params[:id]),
+        kind: "BID"
+      )
+      #TODO what do we want to do after we have created the bid? Where do we direct?
+    end
+    #TODO some form of notification would be nice, to tell the user they need to be logged in. Maybe handle in front?
+    binding.pry
+    redirect_to current_user
   end
 
   # DELETE /stocks/1

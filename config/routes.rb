@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
   resources :users
-  resources :stocks
+  resources :stocks do
+    member do
+      get 'bid'
+    end
+  end
   get 'signup' => 'users#new'
 end

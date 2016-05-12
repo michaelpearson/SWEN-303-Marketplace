@@ -10,3 +10,4 @@
 </ul>
 
 <%= link_to 'Back', stocks_url %><% if logged_in(@stock.owner) %> | <%= link_to 'Edit', edit_stock_path(@stock) %> <% end %>
+<%= link_to 'Bid', logged_in? ? bid_stock_path : "#" %>
