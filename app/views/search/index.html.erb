@@ -5,5 +5,5 @@
     <li><a><%= result[:description] %></a></li>
     <li><a><%= result[:stock_id] %></a></li>
     <li><a><%= result[:price] %></a></li>
-    <li><%= image_tag result[:image] %></ul>
+    <li><%= image_tag image_path(result[:image]) %></ul>
 <%end%>

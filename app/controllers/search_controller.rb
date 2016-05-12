@@ -6,7 +6,7 @@ class SearchController < ApplicationController
         :title => 'Some item',
         :description => 'Some item description which will give a short description',
         :price => 100,
-        :image => '/assets/images/mock/hidethepain.png'
+        :image => 'mock/hidethepain.png'
                 }]
 
   end
