@@ -13,11 +13,10 @@
   </div>
 
   <%= fields_for :photos do |photos| %>
-      <div class="form-group">
-          <%= photos.label :image, {:class => 'form-label'} %>
-          <%= photos.file_field :image, multiple: true, as: :file %>
-      </div>
-
+    <div class="form-group">
+      <%= photos.label :image, {:class => 'form-label'} %>
+      <%= photos.file_field :image, multiple: true, as: :file %>
+    </div>
   <% end %>
   <%= f.submit 'Update', {class: 'btn btn-default'} %>
 <% end %>

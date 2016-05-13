@@ -21,26 +21,37 @@ users = User.create([
   { username:"arrow", realname:"Oliver Queen",password:"arrow"}
 ])
 
-stocks = Stock.create([
-  { owner: users[1],  label:"Camera", price: 12.9000,quantity: 3},
-  { owner: users[1],  label:"Hat", price: 30.0000, quantity:1},
-  { owner: users[2],  label:"Bald Eagle", price: 999.9900, quantity:10},
-  { owner: users[2],  label:"Kiwi", price: 49999.9900, quantity:3},
-  { owner: users[3],  label:"Snakes and Ladders", price: 1.0000, quantity:1},
-  { owner: users[3],  label:"Monopoly", price: 3.0000, quantity:1},
-  { owner: users[4],  label:"Holy Grail", price: 0.9900, quantity:1},
-  { owner: users[5],  label:"Meaning of Life", price: 42.0000, quantity:20},
-  { owner: users[5],  label:"Cactus", price: 9.9900, quantity:3},
-  { owner: users[5],  label:"Iris", price: 9.9900, quantity:15},
-  { owner: users[6],  label:"Knives", price: 15.5000, quantity:4},
-  { owner: users[6],  label:"Sword", price: 49.9700, quantity:8},
-  { owner: users[7],  label:"Kryptonite", price: 0.5000, quantity:100},
-  { owner: users[7],  label:"S Clothing Patch", price: 5.9900, quantity:1000},
-  { owner: users[8],  label:"Table", price: 10.0000, quantity:1},
-  { owner: users[9],  label:"Small Chair", price: 5.0000, quantity:1},
-  { owner: users[10], label:"Coffee", price: 4.9900, quantity:10},
-  { owner: users[10], label:"Muffin", price: 3.5000, quantity:10}
-])
+stocks = []
+[
+  [users[1], "Camera",   12.9000,  3, ["camera.jpg"]],
+  [users[1], "Hat",   30.0000,  1, ["hat.jpg"]],
+  [users[2], "Bald Eagle",   999.9900,  10, ["bald-eagle.jpg"]],
+  [users[2], "Kiwi",   49999.9900,  3, ["kiwi.jpg"]],
+  [users[3], "Snakes and Ladders",   1.0000,  1, ["snakes-ladders.jpg"]],
+  [users[3], "Monopoly",   3.0000,  1, ["monopoly.jpg"]],
+  [users[4], "Holy Grail",   0.9900,  1, ["holy-grail.jpg"]],
+  [users[5], "Meaning of Life",   42.0000,  20, ["meaning-of-life.jpg"]],
+  [users[5], "Cactus",   9.9900,  3, ["cactus.jpg"]],
+  [users[5], "Iris",   9.9900,  15, ["iris.jpg"]],
+  [users[6], "Knives",   15.5000,  4, ["knives-1.jpg", "knives-2.jpg", "knives-3.jpg", "knives-4.jpg"]],
+  [users[6], "Sword",   49.9700,  8, ["sword.jpg"]],
+  [users[7], "Kryptonite",   0.5000,  100, ["kryptonite.jpg"]],
+  [users[7], "S Clothing Patch",   5.9900,  1000, ["s-patch.jpg"]],
+  [users[8], "Table",   10.0000,  1, ["table.jpg"]],
+  [users[9], "Small Chair",   5.0000,  1, ["chair.jpg"]],
+  [users[10], "Coffee", 4.9900,  10, ["coffee.jpg"]],
+  [users[10], "Muffin", 3.5000,  10, ["muffin.jpg"]]
+].each do |stock| 
+  s = Stock.create(
+    owner: stock[0],
+    label: stock[1],
+    price: stock[2],
+    quantity: stock[3]
+  )
+  s.photos = stock[4].map { |p| Photo.create(image: File.open("db/images/#{p}")) }
+
+  stocks << s
+end
 
 Transaction.create([
   {stock: stocks[2], user: users[0], kind: "PURCHASE"},
