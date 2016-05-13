@@ -8,68 +8,68 @@
 
 
 users = User.create([
-  { username:"admin", realname:"Sally Smith",password:"1337"},
-  { username:"j0nny", realname:"John Diggle",password:"password"},
-  { username:"james", realname:"James Green",password:"green"},
-  { username:"zoo", realname:"Monty Python",password:"dinosaur"},
-  { username:"qwerty", realname:"Zoe Curtis",password:"purple"},
-  { username:"Cambel", realname:"Thea Queen",password:"something"},
-  { username:"Waities", realname:"Kara Danvers",password:"secure"},
-  { username:"Cam", realname:"Camile Jones",password:"12345"},
-  { username:"grod", realname:"Cameron Smith",password:"dfgh"},
-  { username:"flash", realname:"Barry Allen",password:"falsh"},
-  { username:"arrow", realname:"Oliver Queen",password:"arrow"}
+  { username:"admin", realname:"Sally Smith",password:"1337", token_count: rand(0..10)},
+  { username:"j0nny", realname:"John Diggle",password:"password", token_count: rand(0..10)},
+  { username:"james", realname:"James Green",password:"green", token_count: rand(0..10)},
+  { username:"zoo", realname:"Monty Python",password:"dinosaur", token_count: rand(0..10)},
+  { username:"qwerty", realname:"Zoe Curtis",password:"purple", token_count: rand(0..10)},
+  { username:"Cambel", realname:"Thea Queen",password:"something", token_count: rand(0..10)},
+  { username:"Waities", realname:"Kara Danvers",password:"secure", token_count: rand(0..10)},
+  { username:"Cam", realname:"Camile Jones",password:"12345", token_count: rand(0..10)},
+  { username:"grod", realname:"Cameron Smith",password:"dfgh", token_count: rand(0..10)},
+  { username:"flash", realname:"Barry Allen",password:"falsh", token_count: rand(0..10)},
+  { username:"arrow", realname:"Oliver Queen",password:"arrow", token_count: rand(0..10)}
 ])
 
 stocks = []
 [
-  [users[1], "Camera",   12.9000,  3, ["camera.jpg"]],
-  [users[1], "Hat",   30.0000,  1, ["hat.jpg"]],
-  [users[2], "Bald Eagle",   999.9900,  10, ["bald-eagle.jpg"]],
-  [users[2], "Kiwi",   49999.9900,  3, ["kiwi.jpg"]],
-  [users[3], "Snakes and Ladders",   1.0000,  1, ["snakes-ladders.jpg"]],
-  [users[3], "Monopoly",   3.0000,  1, ["monopoly.jpg"]],
-  [users[4], "Holy Grail",   0.9900,  1, ["holy-grail.jpg"]],
-  [users[5], "Meaning of Life",   42.0000,  20, ["meaning-of-life.jpg"]],
-  [users[5], "Cactus",   9.9900,  3, ["cactus.jpg"]],
-  [users[5], "Iris",   9.9900,  15, ["iris.jpg"]],
-  [users[6], "Knives",   15.5000,  4, ["knives-1.jpg", "knives-2.jpg", "knives-3.jpg", "knives-4.jpg"]],
-  [users[6], "Sword",   49.9700,  8, ["sword.jpg"]],
-  [users[7], "Kryptonite",   0.5000,  100, ["kryptonite.jpg"]],
-  [users[7], "S Clothing Patch",   5.9900,  1000, ["s-patch.jpg"]],
-  [users[8], "Table",   10.0000,  1, ["table.jpg"]],
-  [users[9], "Small Chair",   5.0000,  1, ["chair.jpg"]],
-  [users[10], "Coffee", 4.9900,  10, ["coffee.jpg"]],
-  [users[10], "Muffin", 3.5000,  10, ["muffin.jpg"]]
+  [users[1], "Camera",  12, ["camera.jpg"], "This is a description for Camera"],
+  [users[1], "Hat",  30, ["hat.jpg"], "This is a description for Hat"],
+  [users[2], "Bald Eagle",  999, ["bald-eagle.jpg"], "This is a description for Bald Eagle"],
+  [users[2], "Kiwi",  49999, ["kiwi.jpg"], "This is a description for Kiwi"],
+  [users[3], "Snakes and Ladders",  1, ["snakes-ladders.jpg"], "This is a description for Snakes and Ladders"],
+  [users[3], "Monopoly",  3, ["monopoly.jpg"], "This is a description for Monopoly"],
+  [users[4], "Holy Grail",  0, ["holy-grail.jpg"], "This is a description for Holy Grail"],
+  [users[5], "Meaning of Life",  42, ["meaning-of-life.jpg"], "This is a description for Meaning of Life"],
+  [users[5], "Cactus",  9, ["cactus.jpg"], "This is a description for Cactus"],
+  [users[5], "Iris",  9, ["iris.jpg"], "This is a description for Iris"],
+  [users[6], "Knives",  15, ["knives-1.jpg", "knives-2.jpg", "knives-3.jpg", "knives-4.jpg"], "This is a description for Knives"],
+  [users[6], "Sword",  49, ["sword.jpg"], "This is a description for Sword"],
+  [users[7], "Kryptonite",  0, ["kryptonite.jpg"], "This is a description for Kryptonite"],
+  [users[7], "S Clothing Patch",  5, ["s-patch.jpg"], "This is a description for S Clothing Patch"],
+  [users[8], "Table",  10, ["table.jpg"], "This is a description for Table"],
+  [users[9], "Small Chair",  5, ["chair.jpg"], "This is a description for Small Chair"],
+  [users[10], "Coffee",  4, ["coffee.jpg"], "This is a description for Coffee"],
+  [users[10], "Muffin",  3, ["muffin.jpg"], "This is a description for Muffin"]
 ].each do |stock| 
   s = Stock.create(
     owner: stock[0],
     label: stock[1],
     price: stock[2],
-    quantity: stock[3]
+    description: stock[4]
   )
-  s.photos = stock[4].map { |p| Photo.create(image: File.open("db/images/#{p}")) }
+  s.photos = stock[3].map { |p| Photo.create(image: File.open("db/images/#{p}")) }
 
   stocks << s
 end
 
 Transaction.create([
-  {stock: stocks[2], user: users[0], kind: "PURCHASE"},
-  {stock: stocks[0], user: users[9], kind: "PURCHASE"},
-  {stock: stocks[3], user: users[2], kind: "PURCHASE"},
-  {stock: stocks[4], user: users[3], kind: "PURCHASE"},
-  {stock: stocks[13], user: users[0], kind: "PURCHASE"},
-  {stock: stocks[13], user: users[9], kind: "PURCHASE"},
-  {stock: stocks[13], user: users[7], kind: "PURCHASE"},
-  {stock: stocks[17], user: users[6], kind: "PURCHASE"},
-  {stock: stocks[17], user: users[6], kind: "PURCHASE"},
-  {stock: stocks[17], user: users[10], kind: "PURCHASE"},
-  {stock: stocks[10], user: users[10], kind: "PURCHASE"},
-  {stock: stocks[10], user: users[10], kind: "PURCHASE"},
-  {stock: stocks[10], user: users[10], kind: "PURCHASE"},
-  {stock: stocks[10], user: users[10], kind: "PURCHASE"},
-  {stock: stocks[8], user: users[10], kind: "PURCHASE"},
-  {stock: stocks[2], user: users[10], kind: "PURCHASE"},
-  {stock: stocks[16], user: users[10], kind: "PURCHASE"},
-  {stock: stocks[12], user: users[10], kind: "PURCHASE"}
+  {stock: stocks[2], user: users[0], kind: "BID"},
+  {stock: stocks[0], user: users[9], kind: "BID"},
+  {stock: stocks[3], user: users[2], kind: "BID"},
+  {stock: stocks[4], user: users[3], kind: "BID"},
+  {stock: stocks[13], user: users[0], kind: "BID"},
+  {stock: stocks[13], user: users[9], kind: "BID"},
+  {stock: stocks[13], user: users[7], kind: "BID"},
+  {stock: stocks[17], user: users[6], kind: "BID"},
+  {stock: stocks[17], user: users[6], kind: "BID"},
+  {stock: stocks[17], user: users[10], kind: "BID"},
+  {stock: stocks[10], user: users[10], kind: "BID"},
+  {stock: stocks[10], user: users[10], kind: "BID"},
+  {stock: stocks[10], user: users[10], kind: "BID"},
+  {stock: stocks[10], user: users[10], kind: "BID"},
+  {stock: stocks[8], user: users[10], kind: "BID"},
+  {stock: stocks[2], user: users[10], kind: "BID"},
+  {stock: stocks[16], user: users[10], kind: "BID"},
+  {stock: stocks[12], user: users[10], kind: "BID"}
 ])
