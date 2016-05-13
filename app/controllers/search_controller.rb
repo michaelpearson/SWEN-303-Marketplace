@@ -1,13 +1,8 @@
+require_relative('../../app/services/search_by_title')
+
 class SearchController < ApplicationController
   def index
     @search_query = params[:query]
-    @results = [{
-        :stock_id => 1,
-        :title => 'Some item',
-        :description => 'Some item description which will give a short description',
-        :price => 100,
-        :image => 'mock/hidethepain.png'
-                }]
-
+    @results = SearchByTitle.new(@search_query).call
   end
 end

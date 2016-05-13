@@ -23,7 +23,7 @@ class SearchByTitle
       :title => item.label,
       :description => "404 description not found", #TODO include actual description, once implemented
       :price => item.price,
-      :image => '/assets/images/mock/hidethepain.png' #TODO include actual image url
+      :image => 'mock/hidethepain.png' #TODO include actual image url
     }
   end
 end
