@@ -1,0 +1,7 @@
+<ul>
+    <% @stocks.each do |stock| %>
+        <li>
+            <%= link_to stock.label, stock %>
+        </li>
+    <% end %>
+</ul>

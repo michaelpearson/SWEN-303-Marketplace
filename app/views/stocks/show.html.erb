@@ -1,0 +1,13 @@
+<h1><%= @stock.label %></h1>
+<h3>Price: $<%= @stock.price %></h3>
+<h3>Quantity: <%= @stock.quantity %></h3>
+<ul>
+    <% @stock.photos.each do |photo| %>
+        <li>
+            <%= image_tag photo.image.url %>
+        </li>
+    <% end %>
+</ul>
+
+<%= link_to 'Back', stocks_url %><% if logged_in(@stock.owner) %> | <%= link_to 'Edit', edit_stock_path(@stock) %> <% end %>
+<%= link_to 'Bid', logged_in? ? bid_stock_path : "#" %>
