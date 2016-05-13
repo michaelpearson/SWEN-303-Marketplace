@@ -2,5 +2,6 @@ Welcome <%= @user.realname %> <br>
 Your transactions: <br>
 <% @user.transactions.each do |tr| %>
   <%= tr.kind %>
-  <%= tr.stock.label %> <br>
+  <%= tr.stock.label %>
+  <%= tr.stock.price %> <br>
  <% end %>

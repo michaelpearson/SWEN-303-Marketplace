@@ -1,10 +1,11 @@
 class TransactionsController < ApplicationController
+  include SessionsHelper
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.unscoped
+    @transactions = Transaction.for_user(current_user)
   end
 
   # GET /transactions/1
