@@ -1,0 +1,24 @@
+// Place all the styles related to the search controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.results {
+  width: 100%;
+  td {
+    vertical-align: top;
+    background-color: #dfdfdf;
+  }
+  .result {
+    a {
+      color: black;
+    }
+    .price {
+    }
+    .image {
+      width: 150px;
+      img {
+        width: 100%;
+        margin: 10px;
+      }
+    }
+  }
+}

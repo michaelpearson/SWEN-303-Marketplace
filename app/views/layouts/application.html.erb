@@ -9,16 +9,14 @@
   </head>
   <body>
     <div class="header row vcenter">
-      <div class="col-md-3 col-sm-0">
-
-      </div>
+      <div class="col-md-3 col-sm-0"></div>
       <div class="col-md-6 col-sm-9">
         <div class="title">
-          <h1>SWEN 303 Marketplace</h1>
+          <h1><a href="/">SWEN 303 Marketplace</a></h1>
         </div>
         <div class="search-box col-sm-12">
           <form action="/search" method="get" class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="query">
+            <input type="text" class="form-control" placeholder="Search" name="query" value="<%= @search_query if @search_query != nil %>">
             <div class="input-group-btn">
               <button class="btn btn-default" type="submit">
                 Search
@@ -43,7 +41,9 @@
     <div class="row content-outer">
       <div class="col-xs-0 col-md-1"></div>
       <div class="col-xs-12 col-md-10">
+        <div class="body-wrap">
         <%= yield %>
+        </div>
       </div>
       <div class="col-xs-0 col-md-1"></div>
     </div>
