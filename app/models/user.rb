@@ -5,4 +5,8 @@ class User < ApplicationRecord
   def valid_password?(input_password)
     password == input_password
   end
+
+  def transactions
+    Transaction.where(user: id)
+  end
 end

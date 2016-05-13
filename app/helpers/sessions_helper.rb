@@ -3,6 +3,10 @@ module SessionsHelper
     session[:user_id] = user.id
   end
 
+  def logged_in(user)
+    session[:user_id] == user.id
+  end
+
   def log_out
     session[:user_id] = nil
   end
