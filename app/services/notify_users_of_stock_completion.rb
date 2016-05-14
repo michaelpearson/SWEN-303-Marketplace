@@ -20,6 +20,7 @@ class NotifyUsersOfStockCompletion
       user: user,
       stock: item
     )
+    SendPush.new(user.id).call
   end
 
   def title(won)
