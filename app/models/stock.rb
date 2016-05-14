@@ -22,4 +22,12 @@ class Stock < ApplicationRecord
   def has_not_met_required_bids?
     transactions.count < price
   end
+
+  def met_required_bids?
+    transactions.count >= price
+  end
+
+  def percentage_complete
+    transactions.count / price.to_f * 100
+  end
 end

@@ -7,7 +7,7 @@
        aria-valuenow="<%= @stock.bid_count %>"
        aria-valuemin="0"
        aria-valuemax="<%= @stock.price %>"
-       style="width: <%= (@stock.bid_count / @stock.price.to_f) * 100 %>%">
+       style="width: <%= @stock.percentage_complete %>%">
        <span class="sr-only">40% Complete (success)</span>
   </div>
 </div>
