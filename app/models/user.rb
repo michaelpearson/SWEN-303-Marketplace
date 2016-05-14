@@ -11,7 +11,7 @@ class User < ApplicationRecord
   end
 
   def bids
-    Transaction.where(user: id, kind: "BID")
+    Transaction.where(user: id, kind: "BID").map{|transaction| transaction.stock}
   end
 
   def stock
