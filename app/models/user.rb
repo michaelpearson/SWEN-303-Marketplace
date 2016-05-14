@@ -16,6 +16,10 @@ class User < ApplicationRecord
     Transaction.where(user: id, kind: "BID").map{|transaction| transaction.stock}
   end
 
+  def uniq_bids
+    Transaction.where(user: id, kind: "BID").map{|transaction| transaction.stock}.uniq
+  end
+
   def stock
     Stock.where(owner: id)
   end
