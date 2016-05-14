@@ -1,5 +1,5 @@
 <h1>Edit user details</h1>
-<%= link_to "Change password", user_edit_password_path(@user), class:"btn btn-default"%>
+<%= link_to "Change password", user_edit_password_path(@user), class:"btn btn-default"%><br />
 <%= form_for @user, html: { multipart: true } do |f| %>
   <div class="form-group">
     <%= f.label :username, {class: "form-label"}%>
