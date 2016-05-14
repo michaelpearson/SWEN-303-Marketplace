@@ -1,22 +1,41 @@
-// Place all the styles related to the search controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 .result {
+  vertical-align: top;
+  box-shadow: 0 0 3px 2px #b4b4b4;
+  background-color: #ececec;
+  white-space: nowrap;
+  margin: 10px;
+  padding: 10px;
+  a {
+    color: black;
+  }
+
+  .image, .description {
+    display: inline-block;
     vertical-align: top;
-    background-color: #dfdfdf;
+  }
 
-    a {
-        color: black;
+  .image {
+    display: inline-block;
+    position: relative;
+    background-color: white;
+    padding: 10%;
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
     }
+  }
 
-    .price {}
-
-    .image {
-        width: 150px;
-
-        img {
-            width: 100%;
-            margin: 10px;
-        }
+  .description {
+    h2 {
+      margin: 0;
     }
+  }
 }
