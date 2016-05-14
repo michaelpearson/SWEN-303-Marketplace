@@ -1,12 +1,9 @@
 <h2>Bid history</h2>
 <div class="results">
-  <% @user.transactions.each do |tr| %>
+  <% @user.bids.each do |tr| %>
     <div class="row result">
-      <div class="col-xs-2">
-        <%= tr.kind %>
-      </div>
       <div class="col-xs-4 image">
-        <%= image_tag tr.stock.photos.first.image.url %>
+        <%= link_to image_tag(tr.stock.photos.first.image.url), stock_path(tr.stock.id) %>
       </div>
       <div class="col-xs-4">
         <%= link_to tr.stock.label, stock_path(tr.stock.id) %>

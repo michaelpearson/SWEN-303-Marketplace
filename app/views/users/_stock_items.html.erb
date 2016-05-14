@@ -3,7 +3,7 @@
   <% @user.stock.each do |st| %>
     <div class="row result">
       <div class="col-xs-4 image">
-        <%= image_tag st.photos.first.image.url %>
+        <%= link_to image_tag(st.photos.first.image.url), stock_path(st.id) %>
       </div>
       <div class="col-xs-4">
         <%= link_to st.label, stock_path(st.id) %>
