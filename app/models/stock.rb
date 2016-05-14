@@ -11,6 +11,12 @@ class Stock < ApplicationRecord
     bid_count >= price
   end
 
+  def bids_from(user)
+    participating_users.select do |participating_user|
+      participating_user == user
+    end.count
+  end
+
   def participating_users
     Transaction.where(stock: id).map(&:user)
   end

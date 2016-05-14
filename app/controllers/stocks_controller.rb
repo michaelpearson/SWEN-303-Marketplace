@@ -67,23 +67,35 @@ class StocksController < ApplicationController
 
   def bid
     stock = Stock.find_by(id: params[:id])
-    if logged_in? && stock.has_not_met_required_bids? && current_user.can_bid?
+    user = current_user
+    if logged_in? && stock.has_not_met_required_bids? && user.can_bid?
       transaction = Transaction.create(
-        user: current_user,
+        user: user,
         stock: stock,
         kind: "BID"
       )
 
-      current_user.token_count -= 1
-      current_user.save!
+      user.token_count -= 1
+      user.save
 
       if stock.met_required_bids?
         NotifyUsersOfStockCompletion.new(stock, stock.participating_users.sample).call
       end
       #TODO what do we want to do after we have created the bid? Where do we direct?
+      render json: {
+        sucess: true,
+        current_value: stock.bid_count,
+        user_value: stock.bids_from(user)
+      }
+    else
+
+      render json: {
+        sucess: false,
+        current_value: stock.bid_count,
+        user_value: stock.bids_from(user)
+      }
     end
     #TODO some form of notification would be nice, to tell the user they need to be logged in. Maybe handle in front?
-    render json: {sucess: true}
   end
 
   # DELETE /stocks/1
