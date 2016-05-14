@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   include SessionsHelper
+  include ApplicationHelper
+  protect_from_forgery except: :register_push
+
   def index
   end
 
@@ -31,5 +34,15 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: session[:user_id])
+  end
+
+  def register_push
+    puts params
+    if logged_in?
+      NotificationSetting.create(url: params[:url], user: current_user)
+      render json: {sucess: true}
+    else
+      render json: {sucess: false}
+    end
   end
 end
