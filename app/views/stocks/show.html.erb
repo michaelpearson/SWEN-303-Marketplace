@@ -86,6 +86,9 @@ $(document).ready(function() {
       url: '<%= bid_stock_path %>',
       method: 'POST'
     }).success(function(data) {
+      if(data.notAuth){
+        window.location = "<%= login_path(next_url: url_for(action: params[:action], controller:params[:controller])) %>";
+      }
       if (data.sucess) {
         updateProgress(data);
       }
