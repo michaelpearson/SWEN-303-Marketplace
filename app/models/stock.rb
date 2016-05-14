@@ -3,6 +3,10 @@ class Stock < ApplicationRecord
   has_many :photos
   accepts_nested_attributes_for :photos
 
+  def categories
+    Stock.all.map(&:category).uniq
+  end
+
   def bid_count
     transactions.count
   end

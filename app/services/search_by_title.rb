@@ -1,12 +1,13 @@
 class SearchByTitle
-  attr_reader :query
+  attr_reader :query, :category
 
-  def initialize(query)
+  def initialize(query, category = "")
     @query = query
+    @category = category
   end
 
   def call
-    query_stock.map do |item|
+    valid_stock.map do |item|
       stock_to_hash(item)
     end
   end
@@ -14,7 +15,13 @@ class SearchByTitle
   private
 
   def query_stock
-    Stock.where("label ilike ?", "%#{query}%").reject(&:met_required_bids?)
+    Stock.where("label ilike ?", "%#{query}%")
+  end
+
+  def valid_stock
+    query_stock.reject(&:met_required_bids?).select do |x|
+      x.category.include? category
+    end
   end
 
   def stock_to_hash(item)
