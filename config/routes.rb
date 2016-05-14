@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'pull' => 'notifications#pull'
+
   resources :transactions
   get 'search' => 'search#index'
   get 'login' => 'sessions#new'
