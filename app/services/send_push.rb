@@ -7,6 +7,7 @@ class SendPush
   end
 
   def call
+    return if @user.notification_settings.empty?
     @url = @user.notification_settings.last.url
 
     authentication = @url.sub("#{GOOGLE_GMS_LINK}/", '');
