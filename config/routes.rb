@@ -14,10 +14,12 @@ Rails.application.routes.draw do
     collection do
       post 'register_push'
     end
+    get 'redeem_tokens' => 'tokens#new'
+    post 'redeem_tokens' => 'tokens#create'
   end
   resources :stocks do
     member do
-      get 'bid'
+      post 'bid'
     end
   end
   get 'signup' => 'users#new'

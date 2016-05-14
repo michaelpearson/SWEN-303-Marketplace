@@ -23,7 +23,7 @@ class SearchByTitle
       :title => item.label,
       :description => item.description,
       :price => item.price,
-      :image => 'mock/hidethepain.png' #TODO include actual image url
+      :image => item.photos.empty? ? 'mock/hidethepain.png' : item.photos.first.image.url(:thumb)
     }
   end
 end
