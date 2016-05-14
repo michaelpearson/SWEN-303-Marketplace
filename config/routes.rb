@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'pull' => 'notifications#pull'
 
   resources :transactions
   get 'search' => 'search#index'
@@ -10,6 +11,9 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
   resources :users do
+    collection do
+      post 'register_push'
+    end
     get 'redeem_tokens' => 'tokens#new'
     post 'redeem_tokens' => 'tokens#create'
   end

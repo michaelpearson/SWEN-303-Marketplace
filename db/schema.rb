@@ -11,10 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513234841) do
+ActiveRecord::Schema.define(version: 20160514031710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "notification_settings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notification_settings_on_user_id", using: :btree
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "stock_id"
+    t.string   "description"
+    t.boolean  "seen",        default: false
+    t.boolean  "pushed",      default: false
+    t.string   "title"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "photos", force: :cascade do |t|
     t.integer  "stock_id"
@@ -55,6 +74,7 @@ ActiveRecord::Schema.define(version: 20160513234841) do
     t.integer  "token_count"
   end
 
+  add_foreign_key "notification_settings", "users"
   add_foreign_key "photos", "stocks"
   add_foreign_key "stocks", "users", column: "owner_id"
   add_foreign_key "transactions", "stocks"

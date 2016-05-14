@@ -12,7 +12,7 @@ class Stock < ApplicationRecord
   end
 
   def participating_users
-    Transactions.where(stock: id).map(&:user)
+    Transaction.where(stock: id).map(&:user)
   end
 
   def transactions
@@ -20,7 +20,7 @@ class Stock < ApplicationRecord
   end
 
   def has_not_met_required_bids?
-    transactions.count < price
+    !met_required_bids?
   end
 
   def met_required_bids?
