@@ -78,7 +78,7 @@ class StocksController < ApplicationController
       current_user.save!
 
       if stock.met_required_bids?
-        NotifyUsersOfStockCompletion.new(stock, stock.participating_users.pluck).call
+        NotifyUsersOfStockCompletion.new(stock, stock.participating_users.sample).call
       end
       #TODO what do we want to do after we have created the bid? Where do we direct?
     end

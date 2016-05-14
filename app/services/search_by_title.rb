@@ -14,7 +14,7 @@ class SearchByTitle
   private
 
   def query_stock
-    Stock.where("label ilike ?", "%#{query}%")
+    Stock.where("label ilike ?", "%#{query}%").reject(&:met_required_bids?)
   end
 
   def stock_to_hash(item)
