@@ -6,7 +6,7 @@ class NotificationsToJSON
 
   def call
     {
-      "notifications" => notifications.map(&:to_json)
+      "notifications" => notifications
     }
   end
 end
