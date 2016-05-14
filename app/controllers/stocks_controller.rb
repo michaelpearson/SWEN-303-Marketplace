@@ -61,16 +61,20 @@ class StocksController < ApplicationController
   end
 
   def bid
-    if logged_in? && Stock.find_by(id: params[:id]).has_not_met_required_bids?
+    stock = Stock.find_by(id: params[:id])
+    if logged_in? && stock.has_not_met_required_bids?
       transaction = Transaction.create(
         user: current_user,
-        stock: Stock.find_by(id: params[:id]),
+        stock: stock,
         kind: "BID"
       )
+
+      if stock.met_required_bids?
+        NotifyUsersOfStockCompletion.new(stock, stock.participating_users.pluck).call
+      end
       #TODO what do we want to do after we have created the bid? Where do we direct?
     end
     #TODO some form of notification would be nice, to tell the user they need to be logged in. Maybe handle in front?
-    binding.pry
     redirect_to current_user
   end
 
