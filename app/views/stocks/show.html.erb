@@ -1,12 +1,64 @@
 <h1><%= @stock.label %></h1>
 <h3>Price: $<%= @stock.price %></h3>
-<ul>
-    <% @stock.photos.each do |photo| %>
-        <li>
-            <%= image_tag photo.image.url %>
-        </li>
-    <% end %>
-</ul>
+
+<div class="progress">
+  <div id="token-progress" class="progress-bar progress-bar-success"
+       role="progressbar"
+       aria-valuenow="<%= @stock.bids_count %>"
+       aria-valuemin="0"
+       aria-valuemax="<%= @stock.price %>"
+       style="width: <%= (@stock.bids_count / @stock.price.to_f) * 100 %>%">
+       <span class="sr-only">40% Complete (success)</span>
+  </div>
+</div>
+
+<% unless @stock.photos.empty? %>
+  <div id="stock-photos" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <% @stock.photos.each_with_index do |photo, i| %>
+        <li data-target="#stock-photos" data-slide-to="<%= i %>" <% if i == 0 %> class="active" <% end %>></li>
+      <% end %>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <% @stock.photos.each_with_index do |photo, i| %>
+        <div class="item <% if i == 0 %>active<% end %>">
+          <li data-target="#stock-photos" data-slide-to="<%= i %>"  <% if i == 0 %> class="active" <% end %>></li>
+          <%= image_tag photo.image.url %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#stock-photos" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#stock-photos" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+<% end %>
 
 <%= link_to 'Back', stocks_url %><% if logged_in(@stock.owner) %> | <%= link_to 'Edit', edit_stock_path(@stock) %> <% end %>
-<%= link_to 'Bid', logged_in? ? bid_stock_path : "#" %>
+<button class="btn btn-bid btn-default">Bid</button>
+
+<script>
+$(document).ready(function() {
+  $('.btn-bid').on('click', function() {
+    $.ajax({
+      url: '<%= bid_stock_path %>',
+      method: 'POST'
+    }).complete(function(){
+      $prog = $('#token-progress');
+      var now = parseInt($prog.attr('aria-valuenow')) + 1;
+      var total = $prog.attr('aria-valuemax');
+      $prog.attr('aria-valuenow', now);
+      $prog.css('width', (now / total * 100) + "%");
+    });
+  });
+});
+</script>

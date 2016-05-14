@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
   resources :stocks do
     member do
-      get 'bid'
+      post 'bid'
     end
   end
   get 'signup' => 'users#new'

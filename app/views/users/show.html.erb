@@ -1,7 +1,23 @@
-Welcome <%= @user.realname %> <br>
-Your transactions: <br>
-<% @user.transactions.each do |tr| %>
-  <%= tr.kind %>
-  <%= tr.stock.label %>
-  <%= tr.stock.price %> <br>
- <% end %>
+<h1>Welcome <%= @user.realname %></h1>
+<div class="container-fluid grey">
+  <div class="row">
+    <% if @user.has_stock? %>
+      <div class="col-xs-4">
+        <%= render partial: "user_info", locals: {user: @user} %>
+      </div>
+      <div class="col-xs-4">
+        <%= render partial: "stock_items", locals: {user: @user} %>
+      </div>
+      <div class="col-xs-4">
+        <%= render partial: "bid_history", locals: {user: @user} %>
+      </div>
+    <% else %>
+      <div class="col-xs-6">
+        <%= render partial: "user_info", locals: {user: @user} %>
+      </div>
+      <div class="col-xs-6">
+        <%= render partial: "bid_history", locals: {user: @user} %>
+      </div>
+    <% end %>
+  </div>
+</div>

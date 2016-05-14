@@ -2,6 +2,7 @@ class StocksController < ApplicationController
   include SessionsHelper
   include ApplicationHelper
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery except: :bid
 
   # GET /stocks
   def index
@@ -31,8 +32,10 @@ class StocksController < ApplicationController
     @stock.owner = current_user
     if @stock.save
       @stock.photos = @stock.photos || []
-      params[:photos][:image].each do |photo|
-        @stock.photos.create!(image: photo)
+      if params[:photos]
+        params[:photos][:image].each do |photo|
+          @stock.photos.create!(image: photo)
+        end
       end
       redirect_to @stock, notice: 'Stock was successfully created.'
     else
@@ -48,11 +51,13 @@ class StocksController < ApplicationController
 
     if @stock.update(stock_params)
       @stock.photos = @stock.photos || []
-      params[:photos][:image].each do |photo|
-        p = Photo.new
-        p.image = photo
-        p.save
-        @stock.photos << p
+      if params[:photos]
+        params[:photos][:image].each do |photo|
+          p = Photo.new
+          p.image = photo
+          p.save
+          @stock.photos << p
+        end
       end
       redirect_to @stock, notice: 'Stock was successfully updated.'
     else
@@ -70,7 +75,7 @@ class StocksController < ApplicationController
       #TODO what do we want to do after we have created the bid? Where do we direct?
     end
     #TODO some form of notification would be nice, to tell the user they need to be logged in. Maybe handle in front?
-    binding.pry
+    # binding.pry
     redirect_to current_user
   end
 
