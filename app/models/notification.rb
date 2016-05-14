@@ -2,6 +2,9 @@ class Notification < ApplicationRecord
   belongs_to :user
   belongs_to :stock
 
+  scope :unseen, -> { where(seen: false) }
+  scope :for_user, -> (user) { where(user: user) }
+
   def to_json
     {
       "id" => id,
