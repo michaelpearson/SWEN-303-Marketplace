@@ -7,7 +7,7 @@ class NotifyUsersOfStockCompletion
   end
 
   def call
-    item.participating_users.each do |user|
+    item.participating_users.uniq.each do |user|
       create_notification(user)
     end
   end

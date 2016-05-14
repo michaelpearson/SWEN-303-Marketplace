@@ -12,7 +12,7 @@ class Notification < ApplicationRecord
       "seen" => seen,
       "title" => title,
       "pushed" => pushed,
-      "image" => stock.photos.first.image.url(:thumb)
+      "icon" => stock.photos.first.image.url(:medium)
     }
   end
 end
