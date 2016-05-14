@@ -31,4 +31,8 @@ class User < ApplicationRecord
   def can_bid?
     token_count > 0
   end
+
+  def items_won
+    notifications.select(&:won?).map(&:stock)
+  end
 end

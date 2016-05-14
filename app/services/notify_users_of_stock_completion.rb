@@ -24,10 +24,10 @@ class NotifyUsersOfStockCompletion
   end
 
   def title(won)
-    won ? "Congradulations!" : "Better luck next time!"
+    won ? 'Congratulations!' : 'Better luck next time!'
   end
 
   def description(won)
-    won ? "You won the #{item.label}!" : "Unfortunatley you didn't win the #{item.label}"
+    won ? "You won the #{item.label}!" : "Unfortunately you didn't win the #{item.label}"
   end
 end

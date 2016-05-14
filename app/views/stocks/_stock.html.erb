@@ -1,12 +1,16 @@
 <div class="row result">
-  <div class="col-xs-4 image">
+  <div class="col-xs-4 col-md-3 image">
     <% if stock.photos.first %>
-    <%= link_to image_tag(stock.photos.first.image.url), stock_path(stock) %>
-  <% else %>
-    <%= link_to image_tag("mock/hidethepain.png"), stock_path(stock) %>
-  <% end %>
+        <%= link_to image_tag(stock.photos.first.image.url), stock_path(stock) %>
+    <% else %>
+        <%= link_to image_tag("mock/hidethepain.png"), stock_path(stock) %>
+    <% end %>
   </div>
-  <div class="col-xs-4">
-    <%= link_to stock.label, stock_path(stock) %>
+  <div class="col-xs-8 col-md-9 description">
+    <h2><%= link_to stock.label, stock_path(stock.id) %></h2>
+    <%= stock.label %>
+    <div class="price">
+      <%= number_to_currency(stock.price) %>
+    </div>
   </div>
 </div>

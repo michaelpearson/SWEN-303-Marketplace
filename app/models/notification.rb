@@ -18,4 +18,8 @@ class Notification < ApplicationRecord
       "icon" => stock.photos.first.image.url(:medium)
     }
   end
+
+  def won?
+    title == 'Congratulations!'
+  end
 end

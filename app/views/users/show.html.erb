@@ -1,44 +1,41 @@
 <h1>Welcome <%= @user.realname %></h1>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-6">
-      <h3>Token Count: <%= @user.token_count %></h3>
-      <%= link_to "Add more tokens", user_redeem_tokens_path(@user), class:"btn btn-default"%>
-    </div>
-    <div class="col-sm-6">
-    <h3>User actions</h3>
-      <%= link_to "Add stock", new_stock_path, class:"btn btn-default"%>
-      <%= link_to "Change username", edit_user_path(@user), class:"btn btn-default" %>
-      <%= link_to "Change password", user_edit_password_path(@user), class:"btn btn-default" %>
+
+<p>Welcome to your MyRafflr page! From this page you can review your bidding activity and manage your account settings.</p>
+<div class="row">
+  <div class="col-md-6 tokens">
+    <h3>Account tokens</h3>
+    <p>You have a total of <span class="badge"><%= @user.token_count %></span> token(s)</p>
+    <p>Tokens can be used to bid on items throughout the site</p>
+    <%= link_to('Purchase more tokens', user_redeem_tokens_path(@user), class: 'btn btn-primary') %>
+  </div>
+  <div class="col-md-6 account_settings">
+    <h3>Account details</h3>
+    <p>These are you account details which control how your information appears on the Rafflr system</p>
+    <p>To make a change update the relevant fields and click save changes. To edit your password <a href="/user/editpassword">Click here</a></p>
+    <div class="form row">
+      <div class="form-group col-sm-6">
+        <label for="name">Name</label>
+        <input class="form-control" type="text" placeholder="Full Name" value="<%= @user.realname %>">
+      </div>
+      <div class="form-group col-sm-6">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" placeholder="Username" value="<%= @user.username %>">
+      </div>
+      <div class="col-xs-12">
+        <div class="form-group">
+          <a href="#" class="btn btn-primary">Save Changes</a>
+
+        </div>
+      </div>
     </div>
   </div>
-  <br />
-</div>
-
-  <br />
-  <div class="container-fluid">
-    <%= render partial: "notifications/notification", collection: @notifications, as: :notification %>
+  <div class="col-md-6 items_selling">
+    <h3>Items im raffling <span class="badge"><%= @user.stock.size %></span></h3>
+    <%= render(partial: "stocks/stock", collection: @user.stock, as: :stock) %>
+    <a class="btn btn-primary" href="/stocks/new">Raffle a new item</a>
   </div>
-
-<br />
-
-<div class="container-fluid grey">
-  <div class="row">
-    <% if @user.has_stock? %>
-      <div class="col-sm-6">
-        <h2>Stock items</h2>
-        <%= render partial: "stocks/stock", collection: @user.stock, as: :stock %>
-      </div>
-      <div class="col-sm-6">
-        <h2>Bid history</h2>
-        <%= render partial: "stocks/stock", collection: @user.uniq_bids, as: :stock %>
-      </div>
-      
-    <% else %>
-      <div class="col-sm-12">
-        <h2>Bid history</h2>
-        <%= render partial: "stocks/stock", collection: @user.uniq_bids, as: :stock %>
-      </div>
-    <% end %>
+  <div class="col-md-6 items_won">
+    <h3>Items i've won <span class="badge"><%= @user.items_won.size %></span></h3>
+    <%= render(partial: "stocks/stock", collection: @user.items_won, as: :stock) %>
   </div>
 </div>
