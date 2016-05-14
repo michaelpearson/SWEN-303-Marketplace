@@ -17,14 +17,17 @@
 @import "search";
 @import "transactions";
 
+$colour_primary: #2E2F30;
+$colour_accent: #ff0088;
+$colour_primary_text: #999999;
+
 body {
   overflow-x: hidden;
 }
 
 .header {
-  background-color: #2E2F30;
-  color: #999999;
-  //height: 250px;
+  background-color: $colour_primary;
+  color: $colour_primary_text;
   text-align: center;
   padding: 30px;
   margin-bottom: 10px;
@@ -33,6 +36,18 @@ body {
     margin: 20px 0 20px 0;
   }
 }
+
+.footer {
+  margin-top: 50px;
+  background-color: $colour_primary;
+  color: $colour_primary_text;
+  padding: 20px;
+  a, a:hover {
+    text-decoration: none;
+    color: $colour_primary_text;
+  }
+}
+
 
 .title {
   padding: 10px;

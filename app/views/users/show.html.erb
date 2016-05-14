@@ -2,22 +2,22 @@
 <div class="container-fluid grey">
   <div class="row">
     <% if @user.has_stock? %>
-      <div class="col-xs-4">
+      <div class="col-md-4">
         <%= render partial: "user_info", locals: {user: @user} %>
       </div>
-      <div class="col-xs-4">
+      <div class="col-md-4">
         <h2>Stock items</h2>
         <%= render partial: "stocks/stock", collection: @user.stock, as: :stock %>
       </div>
-      <div class="col-xs-4">
+      <div class="col-md-4">
         <h2>Bid history</h2>
         <%= render partial: "stocks/stock", collection: @user.uniq_bids, as: :stock %>
       </div>
     <% else %>
-      <div class="col-xs-6">
+      <div class="col-sm-6">
         <%= render partial: "user_info", locals: {user: @user} %>
       </div>
-      <div class="col-xs-6">
+      <div class="col-sm-6">
         <h2>Bid history</h2>
         <%= render partial: "stocks/stock", collection: @user.uniq_bids, as: :stock %>
       </div>
