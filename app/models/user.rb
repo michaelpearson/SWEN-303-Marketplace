@@ -9,4 +9,12 @@ class User < ApplicationRecord
   def transactions
     Transaction.where(user: id)
   end
+
+  def stock
+    Stock.where(owner: id)
+  end
+
+  def has_stock?
+    Stock.where(owner: id).size > 0
+  end
 end
