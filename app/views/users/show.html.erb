@@ -6,17 +6,20 @@
         <%= render partial: "user_info", locals: {user: @user} %>
       </div>
       <div class="col-xs-4">
+        <h2>Stock items</h2>
         <%= render partial: "stocks/stock", collection: @user.stock, as: :stock %>
       </div>
       <div class="col-xs-4">
-        <%= render partial: "stocks/stock", collection: @user.bids, as: :stock %>
+        <h2>Bid history</h2>
+        <%= render partial: "stocks/stock", collection: @user.uniq_bids, as: :stock %>
       </div>
     <% else %>
       <div class="col-xs-6">
-        <%= render partial: "stocks/stock", collection: @user.stock, as: :stock %>
+        <%= render partial: "user_info", locals: {user: @user} %>
       </div>
       <div class="col-xs-6">
-        <%= render partial: "stocks/stock", collection: @user.bids, as: :stock %>
+        <h2>Bid history</h2>
+        <%= render partial: "stocks/stock", collection: @user.uniq_bids, as: :stock %>
       </div>
     <% end %>
   </div>
