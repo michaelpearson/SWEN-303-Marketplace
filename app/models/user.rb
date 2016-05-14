@@ -10,11 +10,15 @@ class User < ApplicationRecord
     Transaction.where(user: id)
   end
 
+  def bids
+    Transaction.where(user: id, kind: "BID")
+  end
+
   def stock
     Stock.where(owner: id)
   end
 
   def has_stock?
-    Stock.where(owner: id).size > 0
+    Stock.where(owner: id).any?
   end
 end
