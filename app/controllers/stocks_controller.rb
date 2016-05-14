@@ -74,8 +74,8 @@ class StocksController < ApplicationController
         kind: "BID"
       )
 
-      user.token_count -= 1
-      user.save
+      current_user.token_count -= 1
+      current_user.save!
 
       if stock.met_required_bids?
         NotifyUsersOfStockCompletion.new(stock, stock.participating_users.pluck).call
