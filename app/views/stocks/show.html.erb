@@ -4,10 +4,10 @@
 <div class="progress">
   <div id="token-progress" class="progress-bar progress-bar-success"
        role="progressbar"
-       aria-valuenow="<%= @stock.bids_count %>"
+       aria-valuenow="<%= @stock.bid_count %>"
        aria-valuemin="0"
        aria-valuemax="<%= @stock.price %>"
-       style="width: <%= (@stock.bids_count / @stock.price.to_f) * 100 %>%">
+       style="width: <%= (@stock.bid_count / @stock.price.to_f) * 100 %>%">
        <span class="sr-only">40% Complete (success)</span>
   </div>
 </div>

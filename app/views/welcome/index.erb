@@ -1,0 +1,17 @@
+<div class="row">
+  <h1>Welcome</h1>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <h2>Recent</h2>
+    <% @recent.each do |recent| %>
+      <%= recent.label %>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <h2>About to finish</h2>
+    <% @close.each do |close| %>
+      <%= close.label %>
+    <% end %>
+  </div>
+</div>
