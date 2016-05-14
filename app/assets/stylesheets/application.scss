@@ -22,7 +22,8 @@ $colour_accent: #ff0088;
 $colour_primary_text: #999999;
 
 body {
-  overflow-x: hidden;
+  min-width: 400px;
+  background-color: #f0f0f0;
 }
 
 .header {

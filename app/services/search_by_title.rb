@@ -23,7 +23,7 @@ class SearchByTitle
       :title => item.label,
       :description => item.description,
       :price => item.price,
-      :image => item.photos.empty? ? 'mock/hidethepain.png' : item.photos.first.image.url(:thumb)
+      :image => item.photos.empty? ? 'mock/hidethepain.png' : item.photos.first.image.url
     }
   end
 end
