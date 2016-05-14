@@ -65,6 +65,15 @@ class StocksController < ApplicationController
     end
   end
 
+  def poll
+    stock = Stock.find_by(id: params[:id])
+    user = current_user
+    render json: {
+      current_value: stock.bid_count,
+      user_value: stock.bids_from(user)
+    }
+  end
+
   def bid
     stock = Stock.find_by(id: params[:id])
     user = current_user
