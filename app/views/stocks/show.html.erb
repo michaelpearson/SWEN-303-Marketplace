@@ -2,7 +2,6 @@
 <hr>
 
 <div class="row">
-
   <div class="col-md-6">
     <h3>Price: $<%= @stock.price %></h3>
     <p><%= @stock.description %></p>
@@ -13,8 +12,8 @@
            aria-valuenow="<%= @stock.bid_count %>"
            aria-valuemin="0"
            aria-valuemax="<%= @stock.price %>"
-           style="width: <%= @stock.percentage_complete %>%">
-           <span class="sr-only"><%= @stock.percentage_complete %>% Complete</span>
+           style="width: <%= @stock.percentage_complete_from(current_user) %>%;">
+           <span class="sr-only"><%= @stock.percentage_complete_from(current_user) %>% Complete</span>
       </div>
       <div id="token-progress"
            role="progressbar"
@@ -22,8 +21,8 @@
            aria-valuemin="0"
            aria-valuemax="<%= @stock.price %>"
            class="progress-bar progress-bar-warning progress-bar-striped"
-           style="width: <%= @stock.percentage_complete %>%">
-           <span class="sr-only"><%= @stock.percentage_complete %>% Complete</span>
+           style="width: <%= @stock.percentage_complete - @stock.percentage_complete_from(current_user) %>%">
+           <span class="sr-only"><%= (@stock.percentage_complete - @stock.percentage_complete_from(current_user)) %>% Complete</span>
       </div>
     </div>
     <%= link_to 'Back', stocks_url %><% if logged_in(@stock.owner) %> | <%= link_to 'Edit', edit_stock_path(@stock) %> <% end %>
@@ -67,17 +66,40 @@
 
 <script>
 $(document).ready(function() {
+  function updateProgress(update) {
+    $prog = $('#token-progress');
+    $own = $('#token-owned-progress');
+
+    var now = update.current_value;
+    var nowOwned = update.user_value;
+    var total = $prog.attr('aria-valuemax');
+
+    var owned = (nowOwned / total * 100);
+    $prog.attr('aria-valuenow', now);
+    $own.attr('aria-valuenow', nowOwned);
+    $prog.css('width', ((now / total * 100) - owned) + "%");
+    $own.css('width', owned + "%");
+  }
+
   $('.btn-bid').on('click', function() {
     $.ajax({
       url: '<%= bid_stock_path %>',
       method: 'POST'
-    }).complete(function(){
-      $prog = $('#token-progress');
-      var now = parseInt($prog.attr('aria-valuenow')) + 1;
-      var total = $prog.attr('aria-valuemax');
-      $prog.attr('aria-valuenow', now);
-      $prog.css('width', (now / total * 100) + "%");
+    }).success(function(data) {
+      if (data.sucess) {
+        updateProgress(data);
+      }
     });
   });
+
+  setInterval(function() {
+    $.ajax({
+      url: '<%= poll_stock_path %>'
+    }).success(function(data) {
+      if (data.sucess) {
+        updateProgress(data);
+      }
+    });
+  }, 10*1000);
 });
 </script>

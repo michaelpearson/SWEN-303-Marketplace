@@ -101,10 +101,20 @@ class StocksController < ApplicationController
       render json: {
         sucess: false,
         current_value: stock.bid_count,
-        user_value: stock.bids_from(user)
+        user_value: user ? stock.bids_from(user) : 0
       }
     end
     #TODO some form of notification would be nice, to tell the user they need to be logged in. Maybe handle in front?
+  end
+
+  def poll
+    stock = Stock.find_by(id: params[:id])
+    user = current_user
+    render json: {
+      sucess: true,
+      current_value: stock.bid_count,
+      user_value: user ? stock.bids_from(user) : 0
+    }
   end
 
   # DELETE /stocks/1

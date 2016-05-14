@@ -36,4 +36,8 @@ class Stock < ApplicationRecord
   def percentage_complete
     transactions.count / price.to_f * 100
   end
+
+  def percentage_complete_from(user)
+    bids_from(user) / price.to_f * 100
+  end
 end
