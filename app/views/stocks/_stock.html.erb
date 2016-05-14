@@ -1,6 +1,10 @@
 <div class="row result">
   <div class="col-xs-4 image">
+    <% if stock.photos.first %>
     <%= link_to image_tag(stock.photos.first.image.url), stock_path(stock) %>
+  <% else %>
+    <%= link_to image_tag("mock/hidethepain.png"), stock_path(stock) %>
+  <% end %>
   </div>
   <div class="col-xs-4">
     <%= link_to stock.label, stock_path(stock) %>
