@@ -11,7 +11,7 @@
       </div>
       <div class="col-xs-4">
         <h2>Bid history</h2>
-        <%= render partial: "stocks/stock", collection: @user.bids, as: :stock %>
+        <%= render partial: "stocks/stock", collection: @user.uniq_bids, as: :stock %>
       </div>
     <% else %>
       <div class="col-xs-6">
@@ -19,7 +19,7 @@
       </div>
       <div class="col-xs-6">
         <h2>Bid history</h2>
-        <%= render partial: "stocks/stock", collection: @user.bids, as: :stock %>
+        <%= render partial: "stocks/stock", collection: @user.uniq_bids, as: :stock %>
       </div>
     <% end %>
   </div>

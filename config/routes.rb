@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'welcome/index'
   root 'welcome#index'
+  get 'myrafflr' => 'users#show'
   resources :users do
+    
+    get 'edit_password' => 'users#edit_password'
     get 'redeem_tokens' => 'tokens#new'
     post 'redeem_tokens' => 'tokens#create'
   end

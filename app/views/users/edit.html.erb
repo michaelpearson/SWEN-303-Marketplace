@@ -1,0 +1,14 @@
+<h1>Edit user details</h1>
+<%= link_to "Change password", user_edit_password_path(@user), class:"btn btn-default"%>
+<%= form_for @user, html: { multipart: true } do |f| %>
+  <div class="form-group">
+    <%= f.label :username, {class: "form-label"}%>
+    <%= f.text_field :username, {class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :realname, {class: "form-label"} %>
+    <%= f.text_field :realname, {class: "form-control"} %>
+  </div>
+  <%= f.submit 'Update', {class: 'btn btn-default'} %>
+<% end %>
+<%= link_to 'Back', @user %>

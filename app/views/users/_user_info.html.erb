@@ -2,7 +2,7 @@
 <%= link_to "Add more tokens", user_redeem_tokens_path(@user), class:"btn btn-default"%>
 <br>
 <br>
-<ul>
-  <li> <%= link_to "Change username", "#" %> </li>
-  <li> <%= link_to "Change password", "#" %> </li>
-</ul>
+<h3>User actions</h3>
+<%= link_to "Add stock", new_stock_path, class:"btn btn-default"%><br>
+<%= link_to "Change username", edit_user_path(@user), class:"btn btn-default" %><br>
+<%= link_to "Change password", user_edit_password_path(@user), class:"btn btn-default" %>

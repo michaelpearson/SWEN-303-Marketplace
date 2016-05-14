@@ -25,7 +25,6 @@
     <div class="carousel-inner" role="listbox">
       <% @stock.photos.each_with_index do |photo, i| %>
         <div class="item <% if i == 0 %>active<% end %>">
-          <li data-target="#stock-photos" data-slide-to="<%= i %>"  <% if i == 0 %> class="active" <% end %>></li>
           <%= image_tag photo.image.url %>
         </div>
       <% end %>
