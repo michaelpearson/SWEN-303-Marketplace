@@ -1,0 +1,6 @@
+<h1> Redeem tokens <h2>
+<%= form_tag "redeem_tokens" do  %>
+  <%= label_tag "Redemption Code " %>
+  <%= text_field_tag :redemption_code, nil, maxlength: 4, type: "number", placeholder: "xxxx" %>
+  <%= submit_tag %>
+<% end %>

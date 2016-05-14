@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :transactions
   get 'search' => 'search#index'
   get 'login' => 'sessions#new'
@@ -8,7 +9,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'welcome/index'
   root 'welcome#index'
-  resources :users
+  resources :users do
+    get 'redeem_tokens' => 'tokens#new'
+    post 'redeem_tokens' => 'tokens#create'
+  end
   resources :stocks do
     member do
       get 'bid'
