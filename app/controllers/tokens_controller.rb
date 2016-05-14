@@ -1,12 +1,13 @@
 class TokensController < ApplicationController
+  include SessionsHelper
   protect_from_forgery except: :create
   def new
-    puts "Hit TOKEN CONTROLLER#NEW"
   end
 
   def create
+    #TODO login redirection when the branch `stock_rework` is in master
     if params[:redemption_code].length == 4
-      user = User.find_by(id: params[:user_id])
+      user = current_user
       Transaction.create!(
         user_id: user.id,
         stock: Stock.new,

@@ -16,9 +16,11 @@ Rails.application.routes.draw do
       post 'register_push'
     end
     get 'edit_password' => 'users#edit_password'
-    get 'redeem_tokens' => 'tokens#new'
-    post 'redeem_tokens' => 'tokens#create'
   end
+
+  get 'redeem_tokens' => 'tokens#new'
+  post 'redeem_tokens' => 'tokens#create'
+
   resources :stocks do
     member do
       post 'bid'
