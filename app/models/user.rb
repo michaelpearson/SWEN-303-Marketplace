@@ -21,4 +21,8 @@ class User < ApplicationRecord
   def has_stock?
     Stock.where(owner: id).any?
   end
+
+  def can_bid?
+    token_count > 0
+  end
 end
