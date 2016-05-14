@@ -12,7 +12,7 @@ function subscribe() {
         }).then(function(subscription) {
             var endpoint = subscription.endpoint;
             console.log(endpoint);
-            $.ajax('/user/register_push', {
+            $.ajax('/users/register_push', {
                 method: 'post',
                 data: {
                     url: endpoint
