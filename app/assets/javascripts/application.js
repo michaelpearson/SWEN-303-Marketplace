@@ -11,7 +11,6 @@ function subscribe() {
             userVisibleOnly: true
         }).then(function(subscription) {
             var endpoint = subscription.endpoint;
-            console.log(endpoint);
             $.ajax('/users/register_push', {
                 method: 'post',
                 data: {

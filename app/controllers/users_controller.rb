@@ -40,6 +40,7 @@ class UsersController < ApplicationController
     puts params
     if logged_in?
       NotificationSetting.create(url: params[:url], user: current_user)
+      cookies[:user_id] = current_user.id
       render json: {sucess: true}
     else
       render json: {sucess: false}
