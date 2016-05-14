@@ -3,12 +3,12 @@ class Stock < ApplicationRecord
   has_many :photos
   accepts_nested_attributes_for :photos
 
-  def bids_count
+  def bid_count
     transactions.count
   end
 
   def met_required_bids?
-    bids_count >= price
+    bid_count >= price
   end
 
   def participating_users
@@ -21,5 +21,13 @@ class Stock < ApplicationRecord
 
   def has_not_met_required_bids?
     transactions.count < price
+  end
+
+  def met_required_bids?
+    transactions.count >= price
+  end
+
+  def percentage_complete
+    transactions.count / price.to_f * 100
   end
 end

@@ -84,7 +84,7 @@ class StocksController < ApplicationController
     end
     #TODO some form of notification would be nice, to tell the user they need to be logged in. Maybe handle in front?
     # binding.pry
-    redirect_to current_user
+    render json: {sucess: true}
   end
 
   # DELETE /stocks/1
