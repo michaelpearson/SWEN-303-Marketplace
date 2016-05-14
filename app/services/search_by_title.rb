@@ -14,14 +14,14 @@ class SearchByTitle
   private
 
   def query_stock
-    Stock.where("label like ?", "%#{query}%")
+    Stock.where("label ilike ?", "%#{query}%")
   end
 
   def stock_to_hash(item)
     {
       :stock_id => item.id,
       :title => item.label,
-      :description => "404 description not found", #TODO include actual description, once implemented
+      :description => item.description,
       :price => item.price,
       :image => 'mock/hidethepain.png' #TODO include actual image url
     }
