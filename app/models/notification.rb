@@ -15,7 +15,7 @@ class Notification < ApplicationRecord
       "seen" => seen,
       "title" => title,
       "pushed" => pushed,
-      "icon" => stock.photos.first.image.url(:medium)
+      "icon" => stock.primary_image_url(:medium)
     }
   end
 

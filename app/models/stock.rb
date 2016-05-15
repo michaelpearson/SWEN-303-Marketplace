@@ -3,6 +3,8 @@ class Stock < ApplicationRecord
   has_many :photos
   accepts_nested_attributes_for :photos
 
+  DEFAULT_IMAGE_URL = "mock/hidethepain.png"
+
   def bid_count
     transactions.count
   end
@@ -19,6 +21,10 @@ class Stock < ApplicationRecord
 
   def participating_users
     Transaction.where(stock: id).map(&:user)
+  end
+
+  def primary_image_url(type = :medium)
+    photos.present? ? photos.first.image.url(type) : DEFAULT_IMAGE_URL
   end
 
   def transactions

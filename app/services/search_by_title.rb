@@ -17,13 +17,13 @@ class SearchByTitle
     Stock.where("label ilike ?", "%#{query}%").reject(&:met_required_bids?)
   end
 
-  def stock_to_hash(item)
+  def stock_to_hash(stock)
     {
-      :stock_id => item.id,
-      :title => item.label,
-      :description => item.description,
-      :price => item.price,
-      :image => item.photos.empty? ? 'mock/hidethepain.png' : item.photos.first.image.url
+      :stock_id => stock.id,
+      :title => stock.label,
+      :description => stock.description,
+      :price => stock.price,
+      :image => stock.primary_image_url
     }
   end
 end

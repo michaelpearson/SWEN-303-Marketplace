@@ -11,7 +11,8 @@
   <div class="col-md-6 account_settings">
     <h3>Account details</h3>
     <p>These are you account details which control how your information appears on the Rafflr system</p>
-    <p>To make a change update the relevant fields and click save changes. To edit your password <a href="/user/editpassword">Click here</a></p>
+    <p>To make a change update the relevant fields and click save changes. To edit your password
+    <%= link_to "click here", user_edit_password_path(@user) %>.</p>
     <div class="form row">
       <%= form_for(@user) do |f| %>
         <div class="form-group col-sm-6">
@@ -33,7 +34,7 @@
   <div class="col-md-6 items_selling">
     <h3>Items I'm raffling <span class="badge"><%= @user.stock.size %></span></h3>
     <%= render(partial: "stocks/stock", collection: @user.stock, as: :stock) %>
-    <a class="btn btn-primary" href="/stocks/new">Raffle a new item</a>
+    <%= link_to "Raffle an Item", new_stock_path, class: "btn btn-primary" %>
   </div>
   <div class="col-md-6 items_won">
     <h3>Items I've won <span class="badge"><%= @user.items_won.size %></span></h3>
