@@ -12,9 +12,9 @@
     <h3>Account details</h3>
     <p>These are you account details which control how your information appears on the Rafflr system</p>
     <p>To make a change update the relevant fields and click save changes. To edit your password
-    <%= link_to "click here", user_edit_password_path(@user) %>.</p>
+    <%= link_to "click here", myrafflr_edit_password_path %>.</p>
     <div class="form row">
-      <%= form_for(@user) do |f| %>
+      <%= form_for(@user, url: myrafflr_path) do |f| %>
         <div class="form-group col-sm-6">
           <%= label_tag "Real Name" %>
           <%= f.text_field :realname, placeholder: "Full Name", value: @user.realname %>

@@ -11,11 +11,10 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
   get 'myrafflr' => 'users#show'
-  resources :users do
+  resources :users, only: [:create, :new, :register_push, :edit] do
     collection do
       post 'register_push'
     end
-    get 'edit_password' => 'users#edit_password'
   end
 
   get 'myrafflr/edit_password' => 'users#edit_password'

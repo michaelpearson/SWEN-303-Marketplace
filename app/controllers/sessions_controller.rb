@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if existing_user && existing_user.valid_password?(user_data[:password])
       @user = existing_user
       log_in(existing_user)
-      redirect_to user_path(existing_user)
+      redirect_to myrafflr_path
     else
       @alert = {
         type: "warning",

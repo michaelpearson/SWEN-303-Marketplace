@@ -37,7 +37,7 @@ class UsersController < ApplicationController
       )
 
       log_in(user)
-      redirect_to user_path(user)
+      redirect_to myrafflr_path
     end
   end
 
