@@ -13,29 +13,30 @@
     <p>These are you account details which control how your information appears on the Rafflr system</p>
     <p>To make a change update the relevant fields and click save changes. To edit your password <a href="/user/editpassword">Click here</a></p>
     <div class="form row">
-      <div class="form-group col-sm-6">
-        <label for="name">Name</label>
-        <input class="form-control" type="text" placeholder="Full Name" value="<%= @user.realname %>">
-      </div>
-      <div class="form-group col-sm-6">
-        <label for="username">Username</label>
-        <input class="form-control" type="text" placeholder="Username" value="<%= @user.username %>">
-      </div>
-      <div class="col-xs-12">
-        <div class="form-group">
-          <a href="#" class="btn btn-primary">Save Changes</a>
-
+      <%= form_for(@user) do |f| %>
+        <div class="form-group col-sm-6">
+          <%= label_tag "Real Name" %>
+          <%= f.text_field :realname, placeholder: "Full Name", value: @user.realname %>
         </div>
+        <div class="form-group col-sm-6">
+          <%= label_tag "Username" %>
+          <%= f.text_field :username, placeholder: "User Name", value: @user.username %>
+        </div>
+        <div class="col-xs-12">
+          <div class="form-group">
+            <%= f.submit "Save changes", class: "btn btn-primary" %>
+          </div>
+      <% end %>
       </div>
     </div>
   </div>
   <div class="col-md-6 items_selling">
-    <h3>Items im raffling <span class="badge"><%= @user.stock.size %></span></h3>
+    <h3>Items I'm raffling <span class="badge"><%= @user.stock.size %></span></h3>
     <%= render(partial: "stocks/stock", collection: @user.stock, as: :stock) %>
     <a class="btn btn-primary" href="/stocks/new">Raffle a new item</a>
   </div>
   <div class="col-md-6 items_won">
-    <h3>Items i've won <span class="badge"><%= @user.items_won.size %></span></h3>
+    <h3>Items I've won <span class="badge"><%= @user.items_won.size %></span></h3>
     <%= render(partial: "stocks/stock", collection: @user.items_won, as: :stock) %>
   </div>
 </div>
