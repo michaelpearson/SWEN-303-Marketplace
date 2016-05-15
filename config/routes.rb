@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get 'edit_password' => 'users#edit_password'
   end
 
+  get 'myrafflr/edit_password' => 'users#edit_password'
   get 'redeem_tokens' => 'tokens#new'
   post 'redeem_tokens' => 'tokens#create'
 
