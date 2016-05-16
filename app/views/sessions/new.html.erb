@@ -13,5 +13,6 @@
       </div>
     </div>
     <%= f.submit "Login", {class: "btn btn-default" } %>
+    <%= hidden_field_tag :next_url, params[:next_url] %>
   <% end %>
 </div>
