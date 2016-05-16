@@ -1,11 +1,15 @@
 class TokensController < ApplicationController
   include SessionsHelper
+  include ApplicationHelper
+
+  before_action :require_user, only: [:new, :create]
+
   protect_from_forgery except: :create
+
   def new
   end
 
   def create
-    #TODO login redirection when the branch `stock_rework` is in master
     if params[:redemption_code].length == 4
       user = current_user
       Transaction.create!(
@@ -23,5 +27,11 @@ class TokensController < ApplicationController
       }
       render 'new'
     end
+  end
+
+  private
+
+  def require_user
+    require_logged_in
   end
 end

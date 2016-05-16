@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @notifications = Notification.for_user(current_user).unseen
+    @notifications = Notification.for_user(current_user).unseen if logged_in?
   end
 
   def register_push
@@ -72,16 +72,18 @@ class UsersController < ApplicationController
 
   private
   # Use callbacks to share common setup or constraints between actions.
+
   def set_user
+    require_logged_in
     @user = User.find_by(id: session[:user_id])
   end
 
-    def update_notifications
-      seen_notifications(current_user)
-    end
+  def update_notifications
+    seen_notifications(current_user)
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username, :realname, :password)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:username, :realname, :password)
+  end
 end

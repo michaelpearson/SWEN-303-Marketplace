@@ -2,6 +2,7 @@ class StocksController < ApplicationController
   include SessionsHelper
   include ApplicationHelper
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, only: [:new]
   protect_from_forgery except: :bid
 
   # GET /stocks
@@ -131,6 +132,11 @@ class StocksController < ApplicationController
   end
 
   private
+
+  def require_user
+    require_logged_in
+  end
+
   def set_stock
     @stock = Stock.find(params[:id])
   end
