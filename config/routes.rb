@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
   get 'myrafflr' => 'users#show'
+  patch 'myrafflr' => 'users#update'
   resources :users, only: [:create, :new, :register_push, :edit] do
     collection do
       post 'register_push'
