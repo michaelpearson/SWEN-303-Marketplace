@@ -1,63 +1,121 @@
 <h1><%= @stock.label %></h1>
-<h3>Price: $<%= @stock.price %></h3>
+<hr>
 
-<div class="progress">
-  <div id="token-progress" class="progress-bar progress-bar-success"
-       role="progressbar"
-       aria-valuenow="<%= @stock.bid_count %>"
-       aria-valuemin="0"
-       aria-valuemax="<%= @stock.price %>"
-       style="width: <%= @stock.percentage_complete %>%">
-       <span class="sr-only">40% Complete (success)</span>
+<div class="row">
+  <div class="col-md-6">
+    <h2>Total Tokens Needed: <%= @stock.price %></h2>
+    <div class="progress">
+      <div id="token-owned-progress"
+           class="progress-bar progress-bar-success"
+           role="progressbar"
+           aria-valuenow="<%= @stock.bid_count %>"
+           aria-valuemin="0"
+           aria-valuemax="<%= @stock.price %>"
+           style="width: <%= @stock.percentage_complete_from(current_user) %>%;">
+           <span class="sr-only"><%= @stock.percentage_complete_from(current_user) %>% Complete</span>
+      </div>
+      <div id="token-progress"
+           role="progressbar"
+           aria-valuenow="<%= @stock.bid_count %>"
+           aria-valuemin="0"
+           aria-valuemax="<%= @stock.price %>"
+           class="progress-bar progress-bar-warning progress-bar-striped"
+           style="width: <%= @stock.percentage_complete - @stock.percentage_complete_from(current_user) %>%">
+           <span class="sr-only"><%= (@stock.percentage_complete - @stock.percentage_complete_from(current_user)) %>% Complete</span>
+      </div>
+    </div>
+
+    <p class="lead"><%= @stock.description %></p>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= link_to 'Back', stocks_url, {class: "btn btn-default" }%>
+        <% if logged_in(@stock.owner) %>
+          <%= link_to 'Edit', edit_stock_path(@stock), {class: "btn btn-warning" } %>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <button class="pull-right btn btn-success">
+          Bid
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <% unless @stock.photos.empty? %>
+      <div id="stock-photos" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <% @stock.photos.each_with_index do |photo, i| %>
+            <li data-target="#stock-photos" data-slide-to="<%= i %>" <% if i == 0 %> class="active" <% end %>></li>
+          <% end %>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <% @stock.photos.each_with_index do |photo, i| %>
+            <div class="item <% if i == 0 %>active<% end %>">
+              <div style="background:url(<%= photo.image.url%>) center center;
+              background-size:cover;" class="slider-size">
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#stock-photos" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#stock-photos" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    <% end %>
   </div>
 </div>
 
-<% unless @stock.photos.empty? %>
-  <div id="stock-photos" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <% @stock.photos.each_with_index do |photo, i| %>
-        <li data-target="#stock-photos" data-slide-to="<%= i %>" <% if i == 0 %> class="active" <% end %>></li>
-      <% end %>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <% @stock.photos.each_with_index do |photo, i| %>
-        <div class="item <% if i == 0 %>active<% end %>">
-          <%= image_tag photo.image.url %>
-        </div>
-      <% end %>
-    </div>
-
-    <!-- Controls -->
-    <a class="left carousel-control" href="#stock-photos" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#stock-photos" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-<% end %>
-
-<%= link_to 'Back', stocks_url %><% if logged_in(@stock.owner) %> | <%= link_to 'Edit', edit_stock_path(@stock) %> <% end %>
-<button class="btn btn-bid btn-default">Bid</button>
-
 <script>
 $(document).ready(function() {
+  function updateProgress(update) {
+    $prog = $('#token-progress');
+    $own = $('#token-owned-progress');
+
+    var now = update.current_value;
+    var nowOwned = update.user_value;
+    var total = $prog.attr('aria-valuemax');
+
+    var owned = (nowOwned / total * 100);
+    $prog.attr('aria-valuenow', now);
+    $own.attr('aria-valuenow', nowOwned);
+    $prog.css('width', ((now / total * 100) - owned) + "%");
+    $own.css('width', owned + "%");
+  }
+
   $('.btn-bid').on('click', function() {
     $.ajax({
       url: '<%= bid_stock_path %>',
       method: 'POST'
-    }).complete(function(){
-      $prog = $('#token-progress');
-      var now = parseInt($prog.attr('aria-valuenow')) + 1;
-      var total = $prog.attr('aria-valuemax');
-      $prog.attr('aria-valuenow', now);
-      $prog.css('width', (now / total * 100) + "%");
+    }).success(function(data) {
+      if(data.notAuth){
+        window.location = "<%= login_path(next_url: url_for(action: params[:action], controller:params[:controller])) %>";
+      }
+      if (data.sucess) {
+        updateProgress(data);
+      }
     });
   });
+
+  setInterval(function() {
+    $.ajax({
+      url: '<%= poll_stock_path %>'
+    }).success(function(data) {
+      if (data.sucess) {
+        updateProgress(data);
+      }
+    });
+  }, 10*1000);
 });
 </script>

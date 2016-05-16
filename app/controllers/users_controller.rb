@@ -71,10 +71,10 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find_by(id: session[:user_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find_by(id: session[:user_id])
+  end
 
     def update_notifications
       seen_notifications(current_user)

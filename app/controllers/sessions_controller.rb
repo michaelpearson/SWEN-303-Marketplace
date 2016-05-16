@@ -1,6 +1,12 @@
 class SessionsController < ApplicationController
   include SessionsHelper
   def new
+    if params[:next_url].present?
+      @alert ={
+        type: "warning",
+        message: "You must be logged in to view this page."
+      }
+    end
   end
 
   def create
