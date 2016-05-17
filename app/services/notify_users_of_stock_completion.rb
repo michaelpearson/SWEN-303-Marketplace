@@ -7,9 +7,11 @@ class NotifyUsersOfStockCompletion
   end
 
   def call
-    item.participating_users.uniq.each do |user|
-      create_notification(user)
-    end
+    Thread.new{
+      item.participating_users.uniq.each do |user|
+        create_notification(user)
+      end
+    }
   end
 
   def create_notification(user)
