@@ -2,6 +2,7 @@ class StocksController < ApplicationController
   include SessionsHelper
   include ApplicationHelper
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, only: [:new]
   protect_from_forgery except: :bid
 
   # GET /stocks
@@ -75,36 +76,50 @@ class StocksController < ApplicationController
   end
 
   def bid
-    stock = Stock.find_by(id: params[:id])
-    user = current_user
-    if logged_in? && stock.has_not_met_required_bids? && user.can_bid?
-      transaction = Transaction.create(
-        user: user,
-        stock: stock,
-        kind: "BID"
-      )
-
-      user.token_count -= 1
-      user.save
-
-      if stock.met_required_bids?
-        NotifyUsersOfStockCompletion.new(stock, stock.participating_users.sample).call
-      end
-      #TODO what do we want to do after we have created the bid? Where do we direct?
-      render json: {
-        sucess: true,
-        current_value: stock.bid_count,
-        user_value: stock.bids_from(user)
-      }
+    if !logged_in?
+      render json: { notAuth: true }
     else
+      stock = Stock.find_by(id: params[:id])
+      user = current_user
+      if logged_in? && stock.has_not_met_required_bids? && user.can_bid?
+        transaction = Transaction.create(
+          user: user,
+          stock: stock,
+          kind: "BID"
+        )
 
-      render json: {
-        sucess: false,
-        current_value: stock.bid_count,
-        user_value: stock.bids_from(user)
-      }
+        user.token_count -= 1
+        user.save
+
+        if stock.met_required_bids?
+          NotifyUsersOfStockCompletion.new(stock, stock.participating_users.sample).call
+        end
+        #TODO what do we want to do after we have created the bid? Where do we direct?
+        render json: {
+          sucess: true,
+          current_value: stock.bid_count,
+          user_value: stock.bids_from(user)
+        }
+      else
+
+        render json: {
+          sucess: false,
+          current_value: stock.bid_count,
+          user_value: user ? stock.bids_from(user) : 0
+        }
+      end
     end
     #TODO some form of notification would be nice, to tell the user they need to be logged in. Maybe handle in front?
+  end
+
+  def poll
+    stock = Stock.find_by(id: params[:id])
+    user = current_user
+    render json: {
+      sucess: true,
+      current_value: stock.bid_count,
+      user_value: user ? stock.bids_from(user) : 0
+    }
   end
 
   # DELETE /stocks/1
@@ -117,6 +132,11 @@ class StocksController < ApplicationController
   end
 
   private
+
+  def require_user
+    require_logged_in
+  end
+
   def set_stock
     @stock = Stock.find(params[:id])
   end

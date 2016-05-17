@@ -1,6 +1,12 @@
 class SessionsController < ApplicationController
   include SessionsHelper
   def new
+    if params[:next_url].present?
+      @alert ={
+        type: "warning",
+        message: "You must be logged in to view this page."
+      }
+    end
   end
 
   def create
@@ -10,7 +16,7 @@ class SessionsController < ApplicationController
     if existing_user && existing_user.valid_password?(user_data[:password])
       @user = existing_user
       log_in(existing_user)
-      redirect_to user_path(existing_user)
+      redirect_to url_for(params[:next_url]) || myrafflr_path
     else
       @alert = {
         type: "warning",

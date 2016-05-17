@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Wow. Much marketplace</title>
+    <title>Rafflr</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
@@ -9,53 +9,62 @@
     <link rel="manifest" href="/manifest.json">
   </head>
   <body>
-    <div class="header row vcenter">
-      <div class="col-md-3 col-sm-0"></div>
-      <div class="col-md-6 col-sm-9">
-        <div class="title">
-          <h1><a href="/">SWEN 303 Marketplace</a></h1>
+    <div class="container-fluid">
+      <div class="header row vcenter">
+        <div class="col-md-3 col-sm-0"></div>
+        <div class="col-md-6 col-sm-9">
+          <div class="title">
+            <%= link_to root_path do %>
+              <%= image_tag "rafflr.png", width: 300; %>
+              <% end %>
+          </div>
+          <div class="search-box col-sm-12">
+            <form action="/search" method="get" class="input-group">
+              <input type="text" class="form-control" placeholder="Search" name="query" value="<%= @search_query if @search_query != nil %>">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                  Search
+                  <i class="glyphicon glyphicon-search"></i>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="search-box col-sm-12">
-          <form action="/search" method="get" class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="query" value="<%= @search_query if @search_query != nil %>">
-            <div class="input-group-btn">
-              <button class="btn btn-default" type="submit">
-                Search
-                <i class="glyphicon glyphicon-search"></i>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
 
-      <div class="col-md-3 col-sm-3 vcenter">
-        <div class="btn-group">
-          <%= link_to "Signup", signup_path, class: "btn btn-primary" %>
-          <%=
-            link_to_unless(logged_in?, "Login", login_path, class: "btn btn-success") do
-              link_to "Logout", logout_path, class: "btn btn-success"
-            end
-          %>
+        <div class="col-md-3 col-sm-3 vcenter">
+          <div class="btn-group">
+            <%= link_to "Signup", signup_path, class: "btn btn-primary" %>
+            <%=
+              link_to_unless(logged_in?, "Login", login_path, class: "btn btn-success") do
+                link_to "Logout", logout_path, class: "btn btn-success"
+              end
+            %>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row content-outer">
-      <div class="col-xs-0 col-md-1"></div>
-      <div class="col-xs-12 col-md-10">
-        <div class="body-wrap">
-          <%= render 'shared/alert' if @alert %>
-        <%= yield %>
+      <div class="row content-outer">
+        <div class="col-xs-0 col-md-1"></div>
+        <div class="col-xs-12 col-md-10">
+          <div class="body-wrap">
+            <%= render 'shared/alert' if @alert %>
+          <%= yield %>
+          </div>
         </div>
+        <div class="col-xs-0 col-md-1"></div>
       </div>
-      <div class="col-xs-0 col-md-1"></div>
-    </div>
-    <div class="row footer">
-      <div class="col-xs-1 col-md-4"></div>
-      <div class="col-xs-10 col-md-4">
-          <p>&copy; Copyright MyRafflr 2016</p>
-          <p><a href="/">Home</a> - <a href="/myrafflr">MyRafflr</a> - <a href="/login">Login</a> - <a href="/signup">Signup</a></p>
+      <div class="row footer">
+        <div class="col-xs-1 col-md-4"></div>
+        <div class="col-xs-10 col-md-4">
+            <p>&copy; Copyright MyRafflr 2016</p>
+            <p>
+              <%= link_to "Home", root_path %>
+               - <%= link_to "MyRafflr", myrafflr_path%>
+               - <%= link_to "Login", login_path %>
+               - <%= link_to "Signup", signup_path %>
+            </p>
+        </div>
+        <div class="col-xs-1 col-md-4"></div>
       </div>
-      <div class="col-xs-1 col-md-4"></div>
     </div>
   </body>
 </html>

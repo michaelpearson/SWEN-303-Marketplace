@@ -2,6 +2,9 @@ class Notification < ApplicationRecord
   belongs_to :user
   belongs_to :stock
 
+  scope :unseen, -> { where(seen: false) }
+  scope :for_user, -> (user) { where(user: user) }
+
   def to_json
     {
       "id" => id,
@@ -12,7 +15,11 @@ class Notification < ApplicationRecord
       "seen" => seen,
       "title" => title,
       "pushed" => pushed,
-      "icon" => stock.photos.first.image.url(:medium)
+      "icon" => stock.primary_image_url(:medium)
     }
+  end
+
+  def won?
+    title == 'Congratulations!'
   end
 end

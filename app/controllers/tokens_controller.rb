@@ -1,12 +1,17 @@
 class TokensController < ApplicationController
+  include SessionsHelper
+  include ApplicationHelper
+
+  before_action :require_user, only: [:new, :create]
+
   protect_from_forgery except: :create
+
   def new
-    puts "Hit TOKEN CONTROLLER#NEW"
   end
 
   def create
     if params[:redemption_code].length == 4
-      user = User.find_by(id: params[:user_id])
+      user = current_user
       Transaction.create!(
         user_id: user.id,
         stock: Stock.new,
@@ -22,5 +27,11 @@ class TokensController < ApplicationController
       }
       render 'new'
     end
+  end
+
+  private
+
+  def require_user
+    require_logged_in
   end
 end

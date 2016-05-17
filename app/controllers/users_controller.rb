@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   include SessionsHelper
   include ApplicationHelper
+  include NotificationsHelper
   protect_from_forgery except: :register_push
   before_action :set_user, only: [:show, :edit, :edit_password, :update]
+  after_action :update_notifications, only: [:show]
 
   def index
   end
@@ -35,7 +37,7 @@ class UsersController < ApplicationController
       )
 
       log_in(user)
-      redirect_to user_path(user)
+      redirect_to myrafflr_path
     end
   end
 
@@ -44,7 +46,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to myrafflr_path, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -54,6 +56,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @notifications = Notification.for_user(current_user).unseen if logged_in?
   end
 
   def register_push
@@ -68,13 +71,19 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find_by(id: session[:user_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username, :realname, :password)
-    end
+  def set_user
+    require_logged_in
+    @user = User.find_by(id: session[:user_id])
+  end
+
+  def update_notifications
+    seen_notifications(current_user)
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:username, :realname, :password)
+  end
 end

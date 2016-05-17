@@ -11,14 +11,17 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
   get 'myrafflr' => 'users#show'
-  resources :users do
+  patch 'myrafflr' => 'users#update'
+  resources :users, only: [:create, :new, :register_push, :edit] do
     collection do
       post 'register_push'
     end
-    get 'edit_password' => 'users#edit_password'
-    get 'redeem_tokens' => 'tokens#new'
-    post 'redeem_tokens' => 'tokens#create'
   end
+
+  get 'myrafflr/edit_password' => 'users#edit_password'
+  get 'redeem_tokens' => 'tokens#new'
+  post 'redeem_tokens' => 'tokens#create'
+
   resources :stocks do
     member do
       post 'bid'
