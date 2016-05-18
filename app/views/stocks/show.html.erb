@@ -82,18 +82,27 @@
 <script>
 $(document).ready(function() {
   function updateProgress(update) {
-    $prog = $('#token-progress');
-    $own = $('#token-owned-progress');
+    var $prog = $('#token-progress');
+    var $own = $('#token-owned-progress');
+    var $bidbtn = $('#btn-bid');
 
-    var now = update.current_value;
-    var nowOwned = update.user_value;
-    var total = $prog.attr('aria-valuemax');
+    var now = parseInt(update.current_value);
+    var nowOwned = parseInt(update.user_value);
+    var total = parseInt($prog.attr('aria-valuemax'));
 
     var owned = (nowOwned / total * 100);
     $prog.attr('aria-valuenow', now);
     $own.attr('aria-valuenow', nowOwned);
     $prog.css('width', ((now / total * 100) - owned) + "%");
     $own.css('width', owned + "%");
+
+    if (now >= total) {
+      $bidbtn
+        .attr('disabled','')
+        .removeClass('btn-default')
+        .addClass('btn-info')
+        .text('Completed');
+    }
   }
 
   $('#btn-bid').on('click', function() {
@@ -104,13 +113,11 @@ $(document).ready(function() {
       if(data.notAuth){
         window.location = "<%= login_path(next_url: url_for(action: params[:action], controller:params[:controller])) %>";
       }
-      if (data.sucess) {
-        updateProgress(data);
-      }
+      updateProgress(data);
     });
   });
 
-  setInterval(function() {
+  function poll() {
     $.ajax({
       url: '<%= poll_stock_path %>'
     }).success(function(data) {
@@ -118,6 +125,9 @@ $(document).ready(function() {
         updateProgress(data);
       }
     });
-  }, 10*1000);
+  }
+
+  setInterval(poll, 10*1000);
+  poll();
 });
 </script>
