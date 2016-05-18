@@ -7,9 +7,7 @@ class SearchByTitle
   end
 
   def call
-    valid_stock.map do |item|
-      stock_to_hash(item)
-    end
+    valid_stock
   end
 
   private
@@ -22,15 +20,5 @@ class SearchByTitle
     query_stock.reject(&:met_required_bids?).select do |x|
       x.category.include? category
     end
-  end
-
-  def stock_to_hash(stock)
-    {
-      :stock_id => stock.id,
-      :title => stock.label,
-      :description => stock.description,
-      :price => stock.price,
-      :image => stock.primary_image_url
-    }
   end
 end

@@ -1,16 +1,2 @@
 <h2><%=@results.length%> Results found for "<%=@search_query%>"</h2>
-<%@results.each do |result|%>
-  <div class="row result">
-    <div class="col-xs-4 col-md-3 image">
-      <%= image_tag image_path(result[:image]) %>
-    </div>
-
-    <div class="col-xs-8 col-md-9 description">
-      <h2><%= link_to result[:title], stock_path(result[:stock_id]) %></h2>
-      <%= result[:description] %>
-      <div class="price">
-        <%= number_to_currency(result[:price]) %>
-      </div>
-    </div>
-  </div>
-<%end%>
+<%= render partial: "stocks/stock", collection: @results, as: :stock %>
