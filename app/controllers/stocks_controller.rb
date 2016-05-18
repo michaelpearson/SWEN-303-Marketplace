@@ -77,23 +77,16 @@ class StocksController < ApplicationController
 
   def bid
     if !logged_in?
-      render json: { notAuth: true }
+      render json: {
+        notAuth: true,
+        current_value: stock.bid_count,
+        user_value: stock.bids_from(user)
+      }
     else
       stock = Stock.find_by(id: params[:id])
       user = current_user
       if logged_in? && stock.has_not_met_required_bids? && user.can_bid?
-        transaction = Transaction.create(
-          user: user,
-          stock: stock,
-          kind: "BID"
-        )
-
-        user.token_count -= 1
-        user.save
-
-        if stock.met_required_bids?
-          NotifyUsersOfStockCompletion.new(stock, SelectRandomUser.new(stock).call).call
-        end
+        BidOnItem.new(stock, user).call
         #TODO what do we want to do after we have created the bid? Where do we direct?
         render json: {
           sucess: true,
