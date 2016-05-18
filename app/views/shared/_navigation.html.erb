@@ -1,0 +1,32 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+  <ul class="nav sidebar-nav">
+    <li class="sidebar-brand">
+      <%= link_to "Rafflr", root_path %>
+    </li>
+    <li><%= link_to "Home", root_path %></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Raffles <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li class="dropdown-header">Manage your raffles</li>
+        <li><a href="#">Items I'm raffling</a></li>
+        <li><a href="#">Raffled items</a></li>
+        <li><a href="#">Items I'm bidding on</a></li>
+        <li><a href="#">Past bids</a></li>
+      </ul>
+    </li>
+    <li>
+      <%=
+        link_to_unless(logged_in?, "Sign up", signup_path) do
+          link_to "Account details", myrafflr_path
+        end
+      %>
+    </li>
+    <li>
+      <%=
+        link_to_unless(logged_in?, "Log in", login_path) do
+          link_to "Log out", logout_path
+        end
+      %>
+    </li>
+  </ul>
+</nav> <!-- /#sidebar-wrapper -->

@@ -16,11 +16,13 @@
 @import "bootstrap";
 @import "search";
 @import "transactions";
+@import "navigation";
 
-$colour_primary: #F9FFED;
+$colour_primary: #8ac7ce;
+$colour_secondary: #dae5e6;
 $colour_accent: #a2a2a2;
 $colour_primary_text: #999999;
-$colour_primary_background: #fff;
+$colour_primary_background: #f7f8f9;
 
 body {
   min-width: 400px;
@@ -29,6 +31,7 @@ body {
 
 .header {
   background-color: $colour_primary;
+  background-image: linear-gradient($colour_primary, $colour_secondary);
   color: $colour_primary_text;
   text-align: center;
   padding: 7px;
@@ -41,7 +44,7 @@ body {
 
 .footer {
   margin-top: 50px;
-  background-color: $colour_primary;
+  background-color: $colour_secondary;
   color: $colour_primary_text;
   padding: 20px;
   a, a:hover {
@@ -90,7 +93,7 @@ body {
 .carousel-inner > .item > img {
     margin: 0 auto;
     width: 100%;
-    height: 250px; 
+    height: 250px;
 }
 .slider-size {
     min-height: 480px;

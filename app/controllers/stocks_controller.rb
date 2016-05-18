@@ -92,7 +92,7 @@ class StocksController < ApplicationController
         user.save
 
         if stock.met_required_bids?
-          NotifyUsersOfStockCompletion.new(stock, stock.participating_users.sample).call
+          NotifyUsersOfStockCompletion.new(stock, SelectRandomUser.new(stock).call).call
         end
         #TODO what do we want to do after we have created the bid? Where do we direct?
         render json: {
@@ -142,6 +142,6 @@ class StocksController < ApplicationController
   end
 
   def stock_params
-    params.require(:stock).permit(:label, :price, photo_attributes: [:image])
+    params.require(:stock).permit(:label, :description, :price, photo_attributes: [:image])
   end
 end
