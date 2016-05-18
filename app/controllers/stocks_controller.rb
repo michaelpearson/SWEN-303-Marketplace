@@ -142,6 +142,6 @@ class StocksController < ApplicationController
   end
 
   def stock_params
-    params.require(:stock).permit(:label, :price, photo_attributes: [:image])
+    params.require(:stock).permit(:label, :description, :price, photo_attributes: [:image])
   end
 end
