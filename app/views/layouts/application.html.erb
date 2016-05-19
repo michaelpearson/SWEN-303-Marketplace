@@ -53,30 +53,32 @@
             <div class="col-xs-12 col-md-10">
               <div class="body-wrap">
                 <%= render 'shared/alert' if @alert %>
-              <%= yield %>
+                <%= yield %>
               </div>
             </div>
             <div class="col-xs-0 col-md-1"></div>
           </div>
-          <div class="row footer">
-            <div class="col-xs-1 col-md-4"></div>
-            <div class="col-xs-10 col-md-4">
-                <p>&copy; Copyright MyRafflr 2016</p>
-                <p>
-                  <%= link_to "Home", root_path %>
-                   - <%= link_to "MyRafflr", myrafflr_path%>
-                   - <%= link_to_unless(logged_in?, "Login", login_path) do
-                         link_to "My Account", myrafflr_path
-                     end %>
-                   - <%= link_to_unless(logged_in?, "Signup", signup_path) do
-                         link_to "Log out", logout_path
-                     end %>
-                </p>
-            </div>
-            <div class="col-xs-1 col-md-4"></div>
-          </div>
+
         </div>
       </div> <!-- /#page-content-wrapper -->
+      <div class="push"></div>
     </div> <!-- /#wrapper -->
+    <div class="row footer">
+      <div class="col-xs-1 col-md-4"></div>
+      <div class="col-xs-10 col-md-4">
+        <p>&copy; Copyright MyRafflr 2016</p>
+        <p>
+          <%= link_to "Home", root_path %>
+          - <%= link_to "MyRafflr", myrafflr_path%>
+          - <%= link_to_unless(logged_in?, "Login", login_path) do
+          link_to "My Account", myrafflr_path
+        end %>
+          - <%= link_to_unless(logged_in?, "Signup", signup_path) do
+          link_to "Log out", logout_path
+        end %>
+        </p>
+      </div>
+      <div class="col-xs-1 col-md-4"></div>
+    </div>
   </body>
 </html>
