@@ -2,12 +2,14 @@
   <h1>Welcome</h1>
 </div>
 <div class="row">
+  <div class="col-md-6" style="display: block; clear: both;">
   <div class="col-md-6">
     <div class="col-xs-12">
       <h2>Recent</h2>
     </div>
     <%= render partial: "stocks/stock", collection: @recent, as: :stock %>
   </div>
+  <div class="col-md-6" style="display: block; clear: both;">
   <div class="col-md-6">
     <div class="col-xs-12">
       <h2>About to finish</h2>
