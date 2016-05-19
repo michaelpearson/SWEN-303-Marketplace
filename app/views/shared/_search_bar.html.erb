@@ -18,6 +18,9 @@
         <% end %>
         <div class="btn-group pull-right">
           <%= link_to_unless(logged_in?, "Sign up", signup_path, class: "btn btn-primary") do %>
+            <%= link_to redeem_tokens_url,  class:"btn btn-info" do %>
+              Token Count: <span id="token-count" class="badge"><%= current_user.token_count %></span>
+            <% end %>
             <%= link_to "My Account", myrafflr_path, class: "btn btn-primary" %>
           <%  end %>
           <%=

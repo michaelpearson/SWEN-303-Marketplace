@@ -66,24 +66,15 @@ class StocksController < ApplicationController
     end
   end
 
-  def poll
-    stock = Stock.find_by(id: params[:id])
-    user = current_user
-    render json: {
-      current_value: stock.bid_count,
-      user_value: stock.bids_from(user)
-    }
-  end
-
   def bid
+    stock = Stock.find_by(id: params[:id])
     if !logged_in?
       render json: {
         notAuth: true,
         current_value: stock.bid_count,
-        user_value: stock.bids_from(user)
+        user_value: 0
       }
     else
-      stock = Stock.find_by(id: params[:id])
       user = current_user
       if logged_in? && stock.has_not_met_required_bids? && user.can_bid?
         BidOnItem.new(stock, user).call
@@ -91,14 +82,15 @@ class StocksController < ApplicationController
         render json: {
           sucess: true,
           current_value: stock.bid_count,
-          user_value: stock.bids_from(user)
+          user_value: stock.bids_from(user),
+          token_count: user.token_count
         }
       else
-
         render json: {
           sucess: false,
           current_value: stock.bid_count,
-          user_value: user ? stock.bids_from(user) : 0
+          user_value: user ? stock.bids_from(user) : 0,
+          token_count: user ? user.token_count : nil
         }
       end
     end
@@ -111,7 +103,8 @@ class StocksController < ApplicationController
     render json: {
       sucess: true,
       current_value: stock.bid_count,
-      user_value: user ? stock.bids_from(user) : 0
+      user_value: user ? stock.bids_from(user) : 0,
+      token_count: user ? user.token_count : nil
     }
   end
 
