@@ -4,8 +4,8 @@ class Stock < ApplicationRecord
   accepts_nested_attributes_for :photos
   DEFAULT_IMAGE_URL = "mock/hidethepain.png"
 
-  def categories
-    Stock.all.map(&:category).uniq
+  def self.categories
+    @categories ||= Stock.all.map(&:category).uniq
   end
 
   def bid_count

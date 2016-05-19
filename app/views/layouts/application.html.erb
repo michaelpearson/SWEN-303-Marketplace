@@ -30,17 +30,7 @@
                   <%= image_tag "rafflr.png", width: 300; %>
                   <% end %>
               </div>
-              <div class="search-box col-sm-12">
-                <form action="/search" method="get" class="input-group">
-                  <input type="text" class="form-control" placeholder="Search" name="query" value="<%= @search_query if @search_query != nil %>">
-                  <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
-                      Search
-                      <i class="glyphicon glyphicon-search"></i>
-                    </button>
-                  </div>
-                </form>
-              </div>
+            <%= render 'shared/search_bar' %>
             </div>
 
             <div class="col-md-3 col-sm-3 vcenter">

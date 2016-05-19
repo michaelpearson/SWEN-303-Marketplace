@@ -1,2 +1,2 @@
-<h2><%=@results.length%> Results found for "<%=@search_query%>"</h2>
+<h2><%= search_query_text(@search_query, @search_category, @results)%></h2>
 <%= render partial: "stocks/stock", collection: @results, as: :stock %>

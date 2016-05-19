@@ -3,7 +3,7 @@ class SearchByTitle
 
   def initialize(query, category = "")
     @query = query
-    @category = category
+    @category = category != "All" ? category : ""
   end
 
   def call
