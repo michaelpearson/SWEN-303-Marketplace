@@ -20,6 +20,22 @@ class User < ApplicationRecord
     Transaction.where(user: id, kind: "BID").map{|transaction| transaction.stock}.uniq
   end
 
+  def current_stock
+    stock.select(&:has_not_met_required_bids?)
+  end
+
+  def current_bids
+    Transaction.where(user: id, kind: "BID").map(&:stock).uniq.select(&:has_not_met_required_bids?)
+  end
+
+  def past_bids
+    Transaction.where(user: id, kind: "BID").map(&:stock).uniq.select(&:met_required_bids?)
+  end
+
+  def sold_stock
+    stock.select(&:met_required_bids?)
+  end
+
   def stock
     Stock.where(owner: id)
   end

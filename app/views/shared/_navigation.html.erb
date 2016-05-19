@@ -9,11 +9,11 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Raffles <span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
           <li class="dropdown-header">Manage your raffles</li>
-          <li><%= link_to "Raffle a new item", new_stock_path %></li>
-          <li><%= link_to "Items I'm raffling", myrafflr_path(anchor: "items_im_raffling") %></li>
-          <li><a href="#">Raffled items</a></li>
-          <li><a href="#">Items I'm bidding on</a></li>
-          <li><%= link_to "Past bids", myrafflr_path(anchor: "items_won") %></li>
+          <li><%= link_to "Raffle an item", new_stock_path %></li>
+          <li><%= link_to "Items I'm raffling", myrafflr_history_path(type: "items_raffling") %></li>
+          <li><%= link_to "Raffled Items", myrafflr_history_path(type: "items_sold")%></li>
+          <li><%= link_to "Items I'm Bidding On", myrafflr_history_path(type: "items_bid_current")%></li>
+          <li><%= link_to "Past bids", myrafflr_history_path(type: "items_bid_past") %></li>
         </ul>
       </li>
     <% end %>

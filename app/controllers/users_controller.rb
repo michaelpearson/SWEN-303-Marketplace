@@ -55,6 +55,26 @@ class UsersController < ApplicationController
     end
   end
 
+  def history
+    query_type = params[:type]
+    case query_type
+    when "items_raffling"
+      @text = "Items I'm Raffling"
+      @results = current_user.current_stock
+    when "items_sold"
+      @text = "Item's I've sold"
+      @results = current_user.sold_stock
+    when "items_bid_current"
+      @text = "Unfinnished Items I've Bid On"
+      @results = current_user.current_bids
+    when "items_bid_past"
+      @text = "Finnished Items I've Bid On"
+      @results = current_user.past_bids
+    else
+      @results = current_user.uniq_bids
+    end
+  end
+
   def show
     @notifications = Notification.for_user(current_user).unseen if logged_in?
   end

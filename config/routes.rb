@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'myrafflr/history' => 'users#history'
   get 'myrafflr/edit_password' => 'users#edit_password'
   post 'myrafflr/edit_password' => 'users#edit_password'
   get 'myrafflr/edit' => 'users#edit'
