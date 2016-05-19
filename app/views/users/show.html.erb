@@ -6,7 +6,7 @@
     <h3>Account tokens</h3>
     <p>You have a total of <span class="badge"><%= @user.token_count %></span> token(s)</p>
     <p>Tokens can be used to bid on items throughout the site</p>
-    <%= link_to('Purchase more tokens', redeem_tokens_path(@user), class: 'btn btn-primary') %>
+    <%= link_to('Purchase more tokens', redeem_tokens_path, class: 'btn btn-primary') %>
   </div>
   <div class="col-md-6 account_settings">
     <h3>Account details</h3>

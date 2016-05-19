@@ -20,6 +20,11 @@ class TokensController < ApplicationController
 
       user.token_count += 10
       user.save
+      @alert = {
+        type: "success",
+        message: "10 Tokens added to your account!"
+      }
+      render 'new'
     else
       @alert = {
         type: "warning",
