@@ -1,6 +1,41 @@
-<h1> Redeem tokens <h2>
-<%= form_tag "redeem_tokens" do  %>
-  <%= label_tag "Redemption Code " %>
-  <%= text_field_tag :redemption_code, nil, maxlength: 4, type: "number", placeholder: "xxxx" %>
-  <%= submit_tag %>
-<% end %>
+<h2> Redeem tokens <h2>
+<div class="row">
+  <div class="col-sm-8 jumbotron">
+    <%= form_tag "redeem_tokens", class:"form-inline" do  %>
+      <div class="form-group">
+        <%= label_tag "Redemption Code " %>
+        <%= text_field_tag :redemption_code, nil, maxlength: 4, type: "number", placeholder: "xxxx", class:"form-control" %>
+        <%= submit_tag "Add Tokens", class:"btn btn-default" %>
+      </div>
+
+    <% end %>
+  </div>
+  <div class="col-sm-4">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">Your MyRafflr Account</h4>
+      </div>
+      <span class="panel-body">
+        <span class="panel-margin pull-left"><p>Token Balance:</p></span>
+        <span class="panel-margin pull-right"><p><%= current_user.token_count %></p></span>
+    </span>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <h4> MyRafflr Token Codes </h4>
+    <p class="summary">MyRafflr Token Gift codes are any easy way to top up your MyRafflr account with tokens. </p>
+    <p class="content">
+       MyRafflr Token Gift Cards work just like a gift certificate.
+       MyRafflr Token Gift Cards can be redeemed
+       on MyRafflr for the bidding of any item you can
+       bid on MyRafflr. You can find MyRafflr Token Gift
+       Cards at retail stores
+       across the World in a variety of denominations.
+     </p>
+  </div>
+  <div class="col-sm-6">
+    <%= image_tag "gift_cards.png" %>
+  </div>
+</div>

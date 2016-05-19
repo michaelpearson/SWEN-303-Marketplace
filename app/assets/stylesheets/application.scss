@@ -28,7 +28,17 @@ body {
   min-width: 400px;
   background-color: $colour_primary_background;
 }
-
+h4{
+  color:$colour_primary
+}
+p.summary{
+  font-weight: bold;
+  font-size: 18px;
+}
+p.content{
+  font-size: 18px;
+  font-weight: 200;
+}
 .header {
   background-color: $colour_primary;
   background-image: linear-gradient($colour_primary, $colour_secondary);
@@ -104,4 +114,11 @@ body {
 .slider-size {
     min-height: 480px;
     height: 100%;
+}
+
+.panel-margin{
+  padding: 10px;
+  p{
+    font-size: 20px;
+  }
 }
