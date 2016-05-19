@@ -54,7 +54,7 @@ p.content{
 
 .footer {
   text-align: center;
-  margin-top: 50px;
+  //margin-top: 50px;
   background-color: $colour_secondary;
   color: $colour_primary_text;
   padding: 20px;
@@ -129,4 +129,17 @@ p.content{
 .panel-login {
   margin: auto;
   max-width: 500px;
+}
+
+
+html, body {
+  height: 100% !important;
+}
+.wrapper {
+  min-height: 100% !important;
+  margin: 0 auto -175px !important; /* the bottom margin is the negative value of the footer's height */
+}
+.footer, .push {
+  margin-top: 20px;
+  height: 155px !important; /* .push must be the same height as .footer */
 }
