@@ -31,13 +31,27 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6 items_selling">
-    <h3>Items I'm raffling <span class="badge"><%= @user.stock.size %></span></h3>
-    <%= render(partial: "stocks/stock", collection: @user.stock, as: :stock) %>
-    <%= link_to "Raffle an Item", new_stock_path, class: "btn btn-primary" %>
+  <div class="col-md-6 items_selling" name="items_im_raffling">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>
+          Items I'm raffling <span class="badge"><%= @user.stock.size %></span>
+          <%= link_to "Raffle an Item", new_stock_path, class: "btn btn-primary" %>
+        </h3>
+        
+      </div>
+      <%= render(partial: "stocks/stock", collection: @user.stock, as: :stock) %>
+      <div class="col-xs-12">
+        
+      </div>
+    </div>
   </div>
-  <div class="col-md-6 items_won">
-    <h3>Items I've won <span class="badge"><%= @user.items_won.size %></span></h3>
-    <%= render(partial: "stocks/stock", collection: @user.items_won, as: :stock) %>
+  <div class="col-md-6 items_won" name="items_won">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Items I've won <span class="badge"><%= @user.items_won.size %></span></h3>
+      </div>
+      <%= render(partial: "stocks/stock", collection: @user.items_won, as: :stock) %>
+    </div>
   </div>
 </div>

@@ -8,16 +8,16 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Raffles <span class="caret"></span></a>
       <ul class="dropdown-menu" role="menu">
         <li class="dropdown-header">Manage your raffles</li>
-        <li><a href="#">Items I'm raffling</a></li>
+        <li><%= link_to "Items I'm raffling", myrafflr_path(anchor: "items_im_raffling") %></li>
         <li><a href="#">Raffled items</a></li>
         <li><a href="#">Items I'm bidding on</a></li>
-        <li><a href="#">Past bids</a></li>
+        <li><%= link_to "Past bids", myrafflr_path(anchor: "items_won") %></li>
       </ul>
     </li>
     <li>
       <%=
         link_to_unless(logged_in?, "Sign up", signup_path) do
-          link_to "Account details", myrafflr_path
+          link_to "My Account", myrafflr_path
         end
       %>
     </li>

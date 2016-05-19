@@ -47,7 +47,7 @@
               <div class="btn-group">
                 <%=
                   link_to_unless(logged_in?, "Sign up", signup_path, class: "btn btn-primary") do
-                    link_to "Account details", myrafflr_path, class: "btn btn-primary"
+                    link_to "My Account", myrafflr_path, class: "btn btn-primary"
                   end
                 %>
                 <%=
@@ -75,8 +75,12 @@
                 <p>
                   <%= link_to "Home", root_path %>
                    - <%= link_to "MyRafflr", myrafflr_path%>
-                   - <%= link_to "Login", login_path %>
-                   - <%= link_to "Signup", signup_path %>
+                   - <%= link_to_unless(logged_in?, "Login", login_path) do
+                         link_to "My Account", myrafflr_path
+                     end %>
+                   - <%= link_to_unless(logged_in?, "Signup", signup_path) do
+                         link_to "Log out", logout_path
+                     end %>
                 </p>
             </div>
             <div class="col-xs-1 col-md-4"></div>

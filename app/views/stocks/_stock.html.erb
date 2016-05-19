@@ -1,13 +1,15 @@
-<div class="row result">
-  <div class="col-xs-4 col-md-3 image">
-    <%= link_to image_tag(stock.primary_image_url), stock_path(stock) %>
-  </div>
+<div class="col-xs-12 col-sm-7" style="min-width: 400px;">
+  <div class="result">
+    <div class="col-xs-4 col-md-3 image">
+      <%= link_to image_tag(stock.primary_image_url), stock_path(stock) %>
+    </div>
 
-  <div class="col-xs-8 col-md-9 description">
-    <h2><%= link_to stock.label, stock_path(stock.id) %></h2>
-    <%= stock.description.length > 50 ? stock.description[0, 47]+"..." : stock.description %>
-    <div class="price">
-      <%= number_to_currency(stock.price) %>
+    <div class="col-xs-8 col-md-9 description">
+      <h2><%= link_to stock.label, stock_path(stock.id) %></h2>
+      <%= stock.description %>
+      <div class="price">
+        <%= number_to_currency(stock.price) %>
+      </div>
     </div>
   </div>
 </div>

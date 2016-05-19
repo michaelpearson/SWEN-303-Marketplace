@@ -53,6 +53,7 @@ p.content{
 }
 
 .footer {
+  text-align: center;
   margin-top: 50px;
   background-color: $colour_secondary;
   color: $colour_primary_text;
@@ -115,10 +116,16 @@ p.content{
     min-height: 480px;
     height: 100%;
 }
-
 .panel-margin{
   padding: 10px;
   p{
     font-size: 20px;
   }
+.hamburger {
+  position: absolute !important;
+}
+
+.panel-login {
+  margin: auto;
+  max-width: 500px;
 }
