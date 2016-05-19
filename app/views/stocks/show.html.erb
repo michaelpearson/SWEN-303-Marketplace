@@ -85,6 +85,7 @@ $(document).ready(function() {
     var $prog = $('#token-progress');
     var $own = $('#token-owned-progress');
     var $bidbtn = $('#btn-bid');
+    var $tokenCount = $('#token-count');
 
     var now = parseInt(update.current_value);
     var nowOwned = parseInt(update.user_value);
@@ -95,6 +96,29 @@ $(document).ready(function() {
     $own.attr('aria-valuenow', nowOwned);
     $prog.css('width', ((now / total * 100) - owned) + "%");
     $own.css('width', owned + "%");
+
+    if (update.token_count !== undefined) {
+      var tokens = parseInt(update.token_count);
+
+      $tokenCount.text(update.token_count);
+      if (tokens <= 0) {
+        $tokenCount
+          .parent()
+          .addClass('btn-danger');
+
+          if (update.bid) {
+            $tokenCount
+              .parent()
+              .stop(true)
+              .fadeTo('125', 0.5)
+              .fadeTo('125', 1.0);
+          }
+      } else {
+        $tokenCount
+          .parent()
+          .removeClass('btn-danger');
+      }
+    }
 
     if (now >= total) {
       $bidbtn
@@ -113,6 +137,7 @@ $(document).ready(function() {
       if(data.notAuth){
         window.location = "<%= login_path(next_url: url_for(action: params[:action], controller:params[:controller])) %>";
       }
+      data.bid = true;
       updateProgress(data);
     });
   });
