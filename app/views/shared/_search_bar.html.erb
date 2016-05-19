@@ -1,12 +1,32 @@
 <div class="search-box col-sm-12">
   <form action="/search" method="get" class="input-group">
-    <%= text_field_tag "query", "Search", class:"form-control", value: @search_query %>
-    <div class="input-group-btn">
-      <%= select_tag :category, options_for_stock_category(@search_category), class:"form-control" %>
-      <button class="btn btn-default" type="submit">
-        Search
-        <i class="glyphicon glyphicon-search"></i>
-      </button>
+    <div class="row" style="width: 100%;">
+      <div class="input-group col-xs-10 col-sm-12 col-md-12">
+        <input id="query" class="form-control" placeholder="Search" value="<%= @search_query %>">
+        <div class="input-group-btn">
+          <%= select_tag :category, options_for_stock_category(@search_category), class:"form-control" %>
+          <button class="btn btn-default" type="submit">
+            Search
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+        </input>
+      </div>
+
+      <div class="col-xs-12 col-md-12 col-sm-12">
+        <% if logged_in? %>
+        <% end %>
+        <div class="btn-group pull-right">
+          <%= link_to_unless(logged_in?, "Sign up", signup_path, class: "btn btn-primary") do %>
+            <%= link_to "My Account", myrafflr_path, class: "btn btn-primary" %>
+          <%  end %>
+          <%=
+            link_to_unless(logged_in?, "Log in", login_path, class: "btn btn-success") do
+              link_to "Log out", logout_path, class: "btn btn-success"
+            end
+          %>
+      </div>
+      </div>
     </div>
   </form>
 </div>

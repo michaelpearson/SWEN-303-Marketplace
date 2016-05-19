@@ -24,28 +24,16 @@
         <div class="container-fluid">
           <div class="header row vcenter">
             <div class="col-md-3 col-sm-0"></div>
-            <div class="col-md-6 col-sm-9">
-              <div class="title">
-                <%= link_to root_path do %>
-                  <%= image_tag "rafflr.png", width: 300; %>
-                  <% end %>
-              </div>
-            <%= render 'shared/search_bar' %>
-            </div>
+            <div class="col-md-6 col-sm-8">
 
-            <div class="col-md-3 col-sm-3 vcenter">
-              <div class="btn-group">
-                <%=
-                  link_to_unless(logged_in?, "Sign up", signup_path, class: "btn btn-primary") do
-                    link_to "My Account", myrafflr_path, class: "btn btn-primary"
-                  end
-                %>
-                <%=
-                  link_to_unless(logged_in?, "Log in", login_path, class: "btn btn-success") do
-                    link_to "Log out", logout_path, class: "btn btn-success"
-                  end
-                %>
+              <div class="row">
+                <div class="title">
+                  <%= link_to root_path do %>
+                    <%= image_tag "rafflr.png", width: 300; %>
+                  <% end %>
+                </div>
               </div>
+              <%= render 'shared/search_bar' %>
             </div>
           </div>
           <div class="row content-outer">
@@ -58,7 +46,6 @@
             </div>
             <div class="col-xs-0 col-md-1"></div>
           </div>
-
         </div>
       </div> <!-- /#page-content-wrapper -->
       <div class="push"></div>
