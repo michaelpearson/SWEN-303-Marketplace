@@ -1,16 +1,18 @@
 <h1>Welcome <%= @user.realname %></h1>
 
-<p>Welcome to your MyRafflr page! From this page you can review your bidding activity and manage your account settings.</p>
+<p class="content">Welcome to your MyRafflr page! From this page you can review your bidding activity and manage your account settings.</p>
 <div class="row">
   <div class="col-md-6 tokens">
-    <h3>Account tokens</h3>
-    <p>You have a total of <span class="badge"><%= @user.token_count %></span> token(s)</p>
-    <p>Tokens can be used to bid on items throughout the site</p>
+    <h3>MyRafflr Tokens</h3>
+    <p class="summary">You have a total of <span class="badge"><%= @user.token_count %></span> token(s)</p>
+    <p class="content">Tokens can be used to bid on items throughout the site.
+      You can purchase MyRafflr Gift codes at any major retailer.</p>
     <%= link_to('Purchase more tokens', redeem_tokens_path, class: 'btn btn-primary') %>
   </div>
   <div class="col-md-6 account_settings">
     <h3>Account details</h3>
-    <p>These are you account details which control how your information appears on the Rafflr system</p>
+    <p class="summary"> Your user name, real name, and password </p>
+    <p class="content">These are you account details which control how your information appears on the Rafflr system.</p>
     <%= link_to 'Edit my details', myrafflr_edit_path, {class: "btn btn-primary"} %>
     <%= link_to 'Edit my password', myrafflr_edit_password_path, {class: "btn btn-primary"} %>
   </div>
@@ -23,11 +25,11 @@
           Items I'm raffling <span class="badge"><%= @user.stock.size %></span>
           <%= link_to "Raffle an Item", new_stock_path, class: "btn btn-primary" %>
         </h3>
-        
+
       </div>
       <%= render(partial: "stocks/stock", collection: @user.stock, as: :stock) %>
       <div class="col-xs-12">
-        
+
       </div>
     </div>
   </div>

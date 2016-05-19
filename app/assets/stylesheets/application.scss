@@ -19,7 +19,7 @@
 @import "navigation";
 
 $colour_primary: #8ac7ce;
-$colour_secondary: #dae5e6;
+$colour_secondary: #a1cdd2;
 $colour_accent: #a2a2a2;
 $colour_primary_text: #999999;
 $colour_primary_background: #f7f8f9;
@@ -28,8 +28,15 @@ body {
   min-width: 400px;
   background-color: $colour_primary_background;
 }
-h4{
-  color:$colour_primary
+.primary-colour{
+  color:$colour_primary;
+}
+h2{
+  font-size: 35px;
+}
+h3{
+  color:$colour_primary;
+  font-size: 25px;
 }
 p.summary{
   font-weight: bold;
@@ -131,6 +138,23 @@ p.content{
   max-width: 500px;
 }
 
+.divider{
+  width: 80%;
+  max-width: 500px;
+  height: 2px;
+  display: block;
+  background-color: #7d5d81;
+  margin: auto;
+}
+
+.flat-green{
+  width: 100%;
+  height: 100%;
+  background-color: #a6ef7e;
+  margin-top: -20px;
+  text-align: center;
+  color: #8e8b8b;
+}
 
 html, body {
   height: 100% !important;
