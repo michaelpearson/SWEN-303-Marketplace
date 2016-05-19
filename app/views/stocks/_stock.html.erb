@@ -6,7 +6,7 @@
 
     <div class="col-xs-8 col-md-9 description">
       <h2><%= link_to stock.label, stock_path(stock.id) %></h2>
-      <%= stock.description.length > 50 ? stock.description[0, 47]+"..." : stock.description %>
+      <%= stock.description %>
       <div class="price">
         <%= number_to_currency(stock.price) %>
       </div>
