@@ -2,20 +2,14 @@
   <%= form_for @user, url: myrafflr_path, html: { class: "form-horizontal panel-body" } do |f| %>
     <div class="col-sm-12">
       <h1>Edit user details</h1>
-    </div>
-    <div class="form-group">
-      <%= f.label :real_name, {class: "col-sm-12 form-label"}%>
-      <div class="col-sm-12">
+      <div class="form-group">
+        <%= f.label :real_name, {class: "orm-label"}%>
         <%= f.text_field :realname, placeholder: "Full Name", value: @user.realname, class: "form-control" %>
       </div>
-    </div>
-    <div class="form-group">
-      <%= f.label :username, {class: "col-sm-12 form-label"}%>
-      <div class="col-sm-12">
+      <div class="form-group">
+        <%= f.label :username, {class: "form-label"}%>
         <%= f.text_field :username, placeholder: "User Name", value: @user.username, class: "form-control" %>
       </div>
-    </div>
-    <div class="col-sm-12">
       <%= link_to 'Back', myrafflr_path, {class: "btn btn-default"} %>
       <%= f.submit "Save changes", {class: 'btn btn-success pull-right', id: 'submit'} %>
     </div>
