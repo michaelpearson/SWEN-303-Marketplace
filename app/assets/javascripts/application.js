@@ -30,6 +30,10 @@ $(document).ready(function () {
       hamburger_cross();      
     });
 
+    overlay.click(function () {
+      hamburger_cross();      
+    });
+
     function hamburger_cross() {
 
       if (isClosed == true) {          
