@@ -9,6 +9,9 @@
       <%= stock.description %>
       <div class="price">
         <%= stock.price %> Tokens
+        <% unless stock.completed? %>
+          <%= render 'shared/progress_bar', stock: stock %>
+        <% end %>
       </div>
     </div>
   </div>
