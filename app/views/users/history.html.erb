@@ -1,2 +1,4 @@
 <h1><%=@text %> </h1>
-<%= render partial: "stocks/stock", collection: @results, as: :stock %>
+
+<%= render partial: "stocks/stock", collection: @results, as: :stock unless params[:type] == "notifications"%>
+<%= render partial: "notifications/notification_stock", collection: @results, as: :notification if params[:type] == "notifications"%>

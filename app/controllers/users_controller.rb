@@ -82,6 +82,9 @@ class UsersController < ApplicationController
     when "items_new"
       @text = "Recent Raffles"
       @results = Stock.all.order('updated_at DESC')
+    when "notifications"
+      @text = "Notifications"
+      @results = current_user.notifications.reverse
     else
       @results = current_user.uniq_bids
     end
