@@ -19,6 +19,9 @@
             <%= link_to redeem_tokens_url,  class:"btn btn-info" do %>
               Token Count: <span id="token-count" class="badge"><%= current_user.token_count %></span>
             <% end %>
+          <%= link_to myrafflr_history_path(type: "notifications"), class:"btn btn-warning" do %>
+            Notifications <span id="token-count" class="badge"><%= current_user.notification_count %></span>
+          <% end %>
             <%= link_to "My Account", myrafflr_path, class: "btn btn-primary" %>
           <%  end %>
           <%=

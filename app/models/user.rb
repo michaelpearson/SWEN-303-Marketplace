@@ -44,6 +44,10 @@ class User < ApplicationRecord
     Stock.where(owner: id).any?
   end
 
+  def notification_count
+    notifications.unseen.count
+  end
+
   def can_bid?
     token_count > 0
   end

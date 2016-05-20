@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   include NotificationsHelper
   protect_from_forgery except: :register_push
   before_action :set_user, only: [:show, :edit, :edit_password, :update]
-  after_action :update_notifications, only: [:show]
 
   def index
   end
@@ -84,6 +83,7 @@ class UsersController < ApplicationController
       @results = Stock.all.order('updated_at DESC')
     when "notifications"
       @text = "Notifications"
+      update_notifications
       @results = current_user.notifications.reverse
     else
       @results = current_user.uniq_bids
