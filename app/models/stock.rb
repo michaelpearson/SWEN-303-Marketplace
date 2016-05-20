@@ -2,6 +2,7 @@ class Stock < ApplicationRecord
   belongs_to :owner, foreign_key: "owner_id", class_name: "User"
   has_many :photos
   accepts_nested_attributes_for :photos
+
   DEFAULT_IMAGE_URL = "mock/hidethepain.png"
 
   def self.categories
@@ -49,4 +50,6 @@ class Stock < ApplicationRecord
   def percentage_complete_from(user)
     bids_from(user) / price.to_f * 100
   end
+
+  alias completed? met_required_bids?
 end
