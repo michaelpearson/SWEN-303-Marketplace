@@ -27,9 +27,16 @@
         </h3>
 
       </div>
-      <%= render(partial: "stocks/stock", collection: @user.stock, as: :stock) %>
-      <div class="col-xs-12">
 
+      <div class="col-xs-12">
+        <%= render(partial: "stocks/stock", collection: @user.stock.first(3), as: :stock) %>
+      </div>
+      <div class="col-xs-12">
+        <% if @user.stock.empty?  %>
+          <p class="content">You haven't raffled any items, click the button above to start!</p>
+        <% elsif @user.stock.size > 3 %>
+          <%= link_to "See More", myrafflr_history_path(type: "items_raffling"), class:"btn btn-primary" %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -38,7 +45,17 @@
       <div class="col-xs-12">
         <h3>Items I've won <span class="badge"><%= @user.items_won.size %></span></h3>
       </div>
-      <%= render(partial: "stocks/stock", collection: @user.items_won, as: :stock) %>
+      <div class="col-xs-12">
+        <%= render(partial: "stocks/stock", collection: @user.items_won.first(3), as: :stock) %>
+      </div>
+      <div class="col-xs-12">
+        <% if @user.items_won.empty?  %>
+          <p class="content">You haven't won any items, get bidding!</p>
+        <% elsif @user.items_won.size > 3 %>
+          <%= link_to "See More", myrafflr_history_path(type: "items_won"), class:"btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
     </div>
   </div>
 </div>

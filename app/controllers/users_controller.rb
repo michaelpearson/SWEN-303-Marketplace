@@ -70,6 +70,9 @@ class UsersController < ApplicationController
     when "items_bid_past"
       @text = "Finnished Items I've Bid On"
       @results = current_user.past_bids
+    when "items_won"
+      @text = "Items Won"
+      @results = current_user.items_won
     else
       @results = current_user.uniq_bids
     end
