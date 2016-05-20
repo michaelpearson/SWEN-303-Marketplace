@@ -24,37 +24,7 @@
 
   <div class="col-md-6">
     <% unless @stock.photos.empty? %>
-      <div id="stock-photos" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <% @stock.photos.each_with_index do |photo, i| %>
-            <li data-target="#stock-photos" data-slide-to="<%= i %>" <% if i == 0 %> class="active" <% end %>></li>
-          <% end %>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-          <% @stock.photos.each_with_index do |photo, i| %>
-            <div class="item <% if i == 0 %>active<% end %>">
-              <div class="carousel-background">
-                <div style="background:url(<%= photo.image.url%>) center center;
-                background-size:contain; background-repeat: no-repeat;" class="slider-size">
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#stock-photos" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#stock-photos" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
+      <%= render 'shared/carousel', stock: @stock %>
     <% end %>
   </div>
 </div>
