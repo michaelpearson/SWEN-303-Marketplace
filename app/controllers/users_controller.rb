@@ -60,19 +60,28 @@ class UsersController < ApplicationController
     case query_type
     when "items_raffling"
       @text = "Items I'm Raffling"
-      @results = current_user.current_stock
+      @results = current_user.current_stock.reverse
     when "items_sold"
       @text = "Item's I've sold"
-      @results = current_user.sold_stock
+      @results = current_user.sold_stock.reverse
     when "items_bid_current"
       @text = "Unfinnished Items I've Bid On"
-      @results = current_user.current_bids
+      @results = current_user.current_bids.reverse
     when "items_bid_past"
       @text = "Finnished Items I've Bid On"
-      @results = current_user.past_bids
+      @results = current_user.past_bids.reverse
     when "items_won"
       @text = "Items Won"
-      @results = current_user.items_won
+      @results = current_user.items_won.reverse
+    when "items_all_raffeld"
+      @text = "All Items raffled"
+      @results = current_user.stock.reverse
+    when "items_near_completion"
+      @text = "About to Finish"
+      @results = Stock.near_completion
+    when "items_new"
+      @text = "Recent Raffles"
+      @results = Stock.all.order('updated_at DESC')
     else
       @results = current_user.uniq_bids
     end

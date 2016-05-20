@@ -14,6 +14,8 @@
           <li><%= link_to "Raffled Items", myrafflr_history_path(type: "items_sold")%></li>
           <li><%= link_to "Items I'm Bidding On", myrafflr_history_path(type: "items_bid_current")%></li>
           <li><%= link_to "Past bids", myrafflr_history_path(type: "items_bid_past") %></li>
+          <li><%= link_to "About to Finish", myrafflr_history_path(type: "items_near_completion") %></li>
+          <li><%= link_to "Recent Raffles", myrafflr_history_path(type: "items_new") %></li>
         </ul>
       </li>
     <% end %>

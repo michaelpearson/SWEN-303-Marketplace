@@ -51,5 +51,9 @@ class Stock < ApplicationRecord
     bids_from(user) / price.to_f * 100
   end
 
+  def self.near_completion
+    Stock.all.to_a.select(&:has_not_met_required_bids?).sort_by(&:percentage_complete).reverse
+  end
+
   alias completed? met_required_bids?
 end

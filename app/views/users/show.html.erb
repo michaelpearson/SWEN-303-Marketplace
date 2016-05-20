@@ -29,13 +29,13 @@
       </div>
 
       <div class="col-xs-12">
-        <%= render(partial: "stocks/stock", collection: @user.stock.first(3), as: :stock) %>
+        <%= render(partial: "stocks/stock", collection: @user.stock.reverse.first(3), as: :stock) %>
       </div>
       <div class="col-xs-12">
         <% if @user.stock.empty?  %>
           <p class="content">You haven't raffled any items, click the button above to start!</p>
         <% elsif @user.stock.size > 3 %>
-          <%= link_to "See More", myrafflr_history_path(type: "items_raffling"), class:"btn btn-primary" %>
+          <%= link_to "See More", myrafflr_history_path(type: "items_all_raffeld"), class:"btn btn-primary" %>
         <% end %>
       </div>
     </div>
@@ -46,7 +46,7 @@
         <h3>Items I've won <span class="badge"><%= @user.items_won.size %></span></h3>
       </div>
       <div class="col-xs-12">
-        <%= render(partial: "stocks/stock", collection: @user.items_won.first(3), as: :stock) %>
+        <%= render(partial: "stocks/stock", collection: @user.items_won.reverse.first(3), as: :stock) %>
       </div>
       <div class="col-xs-12">
         <% if @user.items_won.empty?  %>
