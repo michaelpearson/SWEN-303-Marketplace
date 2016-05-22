@@ -1,5 +1,5 @@
 <div class="col-xs-12 col-sm-7" style="min-width: 400px;">
-  <div class="result">
+  <div class="result  <%="completed" if notification.seen %>">
     <div class="col-xs-4 col-md-3 image">
       <%= link_to image_tag(notification.stock.primary_image_url), stock_path(notification.stock) %>
     </div>

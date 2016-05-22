@@ -83,8 +83,8 @@ class UsersController < ApplicationController
       @results = Stock.all.order('updated_at DESC')
     when "notifications"
       @text = "Notifications"
-      update_notifications
       @results = current_user.notifications.reverse
+      update_notifications
     else
       @results = current_user.uniq_bids
     end
