@@ -14,7 +14,7 @@
       </div>
 
       <div class="col-xs-12 col-md-12 col-sm-12">
-        <div class="btn-group pull-right" style="margin: 0; margin-top: 10px;">
+        <div class="btn-group" style="margin: 0; margin-top: 10px;">
           <%= link_to_unless(logged_in?, "Sign up", signup_path, class: "btn btn-primary") do %>
             <%= link_to redeem_tokens_url,  class:"btn btn-info" do %>
               Token Count: <span id="token-count" class="badge"><%= current_user.token_count %></span>
