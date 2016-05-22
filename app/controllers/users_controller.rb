@@ -68,7 +68,7 @@ class UsersController < ApplicationController
       @text = "Unfinnished Items I've Bid On"
       @results = current_user.current_bids.reverse
     when "items_bid_past"
-      @text = "Finnished Items I've Bid On"
+      @text = "Finished Items I've Bid On"
       @results = current_user.past_bids.reverse
     when "items_won"
       @text = "Items Won"
