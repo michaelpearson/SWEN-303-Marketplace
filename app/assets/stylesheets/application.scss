@@ -32,18 +32,18 @@ body {
   color:$colour_primary;
 }
 h2{
-  font-size: 35px;
+  font-size: 2em;
 }
 h3{
   color:$colour_primary;
-  font-size: 25px;
+  font-size: 2em;
 }
 p.summary{
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1.5em;
 }
 p.content{
-  font-size: 18px;
+  font-size: 1.4em;
   font-weight: 200;
 }
 .header {
@@ -132,7 +132,9 @@ p.content{
 .hamburger {
   position: absolute !important;
 }
-
+i{
+  font-size:1.1em;
+}
 .panel-login {
   margin: auto;
   max-width: 500px;
