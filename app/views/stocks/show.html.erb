@@ -18,7 +18,7 @@
       </div>
       <div class="col-md-6">
         <!-- Button trigger modal -->
-        <button type="button" class="pull-right btn btn-success" data-toggle="modal" data-target="#myModal">
+        <button type="button" class="pull-right btn btn-success" id="btn-popup" data-toggle="modal" data-target="#myModal">
           Bid
         </button>
 
@@ -31,11 +31,19 @@
                 <h4 class="modal-title" id="myModalLabel">Bid confirmation</h4>
               </div>
               <div class="modal-body">
-                Are you sure you want to bid on <%= @stock.label %>
+                <% if current_user.token_count > 0 %>
+                  Are you sure you want to bid on <%= @stock.label %>
+                <% else %>
+                  Sorry you don't have any tokens left, purchase more tokens now!
+                <% end %>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button class="pull-right btn btn-success" id="btn-bid" data-dismiss="modal">Bid</button>
+                <% if current_user.token_count > 0 %>
+                  <button class="pull-right btn btn-success" id="btn-bid" data-dismiss="modal">Bid</button>
+                <% else %>
+                  <%= link_to "purchase more tokens", redeem_tokens_url, class: "btn btn-primary" %>
+                <% end %>
               </div>
             </div>
           </div>
@@ -58,6 +66,7 @@ $(document).ready(function() {
     var $prog = $('#token-progress');
     var $own = $('#token-owned-progress');
     var $bidbtn = $('#btn-bid');
+    var $popupbtn = $('#btn-popup')
     var $tokenCount = $('#token-count');
 
     var now = parseInt(update.current_value);
@@ -94,7 +103,7 @@ $(document).ready(function() {
     }
 
     if (now >= total) {
-      $bidbtn
+      $popupbtn
         .attr('disabled','')
         .removeClass('btn-default')
         .addClass('btn-info')
