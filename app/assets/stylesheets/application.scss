@@ -51,8 +51,8 @@ p.content{
   background-image: linear-gradient($colour_primary, $colour_secondary);
   color: $colour_primary_text;
   text-align: center;
-  padding: 7px;
-  margin-bottom: 10px;
+  padding: 0px;
+  margin-bottom: 0px;
 
   .btn-group, .input-group {
     margin: 20px 0 20px 0;
@@ -148,14 +148,26 @@ i{
   background-color: #7d5d81;
   margin: auto;
 }
-
-.flat-green{
+.flat{
+  margin-top:-5px;
+  margin-bottom:5px;
   width: 100%;
   height: 100%;
-  background-color: #a6ef7e;
-  margin-top: -20px;
   text-align: center;
   color: #8e8b8b;
+  padding: 0px 0px 20px 0px;
+}
+.flat-green{
+  @extend .flat;
+  background-color: #a6ef7e;
+}
+.flat-babyblue{
+  @extend .flat;
+  background-color: #d8fbff;
+}
+.flat-yellow{
+  @extend .flat;
+  background-color: #fff38c;
 }
 
 html, body {
