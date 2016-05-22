@@ -1,5 +1,6 @@
 <h1><%= @stock.label %></h1>
-<p class="content" > raffled by <%= @stock.owner.username %> </p>
+<p class="content" > raffled by <%= @stock.owner.username %>,
+   <%= time_ago_in_words(@stock.created_at) %> ago </p>
 <hr>
 
 <div class="row">

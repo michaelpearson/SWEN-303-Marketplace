@@ -2,17 +2,17 @@ PREFIX = "This is a description for a"
 LOREM = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
 users = User.create([
-  { username:"admin", realname:"Sally Smith",password:"1337", token_count: rand(10..100)},
-  { username:"j0nny", realname:"John Diggle",password:"password", token_count: rand(10..100)},
-  { username:"james", realname:"James Green",password:"green", token_count: rand(10..100)},
-  { username:"zoo", realname:"Monty Python",password:"dinosaur", token_count: rand(10..100)},
-  { username:"qwerty", realname:"Zoe Curtis",password:"purple", token_count: rand(10..100)},
-  { username:"Cambel", realname:"Thea Queen",password:"something", token_count: rand(10..100)},
-  { username:"Waities", realname:"Kara Danvers",password:"secure", token_count: rand(10..100)},
-  { username:"Cam", realname:"Camile Jones",password:"12345", token_count: rand(10..100)},
-  { username:"grod", realname:"Cameron Smith",password:"dfgh", token_count: rand(10..100)},
-  { username:"flash", realname:"Barry Allen",password:"falsh", token_count: rand(10..100)},
-  { username:"arrow", realname:"Oliver Queen",password:"arrow", token_count: rand(10..100)}
+  { username:"admin", realname:"Sally Smith", email:"Sally.Smith@myrafflr.net", password:"1337", token_count: rand(10..100)},
+  { username:"j0nny", realname:"John Diggle", email:"John.Diggle@myrafflr.net", password:"password", token_count: rand(10..100)},
+  { username:"james", realname:"James Green", email:"James.Green@myrafflr.net", password:"green", token_count: rand(10..100)},
+  { username:"zoo", realname:"Monty Python", email:"Monty.Python@myrafflr.net", password:"dinosaur", token_count: rand(10..100)},
+  { username:"qwerty", realname:"Zoe Curtis", email:"Zoe.Curtis@myrafflr.net", password:"purple", token_count: rand(10..100)},
+  { username:"Cambel", realname:"Thea Queen", email:"Thea.Queen@myrafflr.net", password:"something", token_count: rand(10..100)},
+  { username:"Waities", realname:"Kara Danvers", email:"Kara.Danvers@myrafflr.net", password:"secure", token_count: rand(10..100)},
+  { username:"Cam", realname:"Camile Jones", email:"Camile.Jones@myrafflr.net", password:"12345", token_count: rand(10..100)},
+  { username:"grod", realname:"Cameron Smith", email:"Cameron.Smith@myrafflr.net", password:"dfgh", token_count: rand(10..100)},
+  { username:"flash", realname:"Barry Allen", email:"Barry.Allen@myrafflr.net", password:"falsh", token_count: rand(10..100)},
+  { username:"arrow", realname:"Oliver Queen", email:"Oliver.Queen@myrafflr.net", password:"arrow", token_count: rand(10..100)}
 ])
 
 stocks = [
