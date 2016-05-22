@@ -6,7 +6,8 @@
 
     <div class="col-xs-8 col-md-9 description">
       <h2><%= link_to notification.title, stock_path(notification.stock.id) %></h2>
-      <%= notification.description %><br>
+      <p class="summary"><%= notification.description %></p>
+      <p><i>Contact <%= notification.stock.owner.email %> to organise delivery</i></p>
       <i>Received <%= time_ago_in_words(notification.created_at) %> ago</i>
     </div>
   </div>

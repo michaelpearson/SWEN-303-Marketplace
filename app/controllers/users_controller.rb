@@ -31,6 +31,7 @@ class UsersController < ApplicationController
     else
       user = User.create(
         realname: user_data[:realname],
+        email: user_data[:email],
         username: user_data[:username],
         password: user_data[:password]
       )
