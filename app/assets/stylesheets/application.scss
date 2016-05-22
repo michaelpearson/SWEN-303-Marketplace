@@ -159,7 +159,10 @@ p.content{
   @extend .flat;
   background-color: #a6ef7e;
 }
-
+.flat-babyblue{
+  @extend .flat;
+  background-color: #d8fbff;
+}
 .flat-yellow{
   @extend .flat;
   background-color: #fff38c;
