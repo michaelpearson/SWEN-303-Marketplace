@@ -18,12 +18,12 @@
       </div>
       <div class="col-md-6">
         <!-- Button trigger modal -->
-        <button type="button" class="pull-right btn btn-success" id="btn-popup" data-toggle="modal" data-target="#myModal">
-          Bid
-        </button>
 
         <!-- Modal -->
         <% if current_user %>
+        <button type="button" class="pull-right btn btn-success" id="btn-popup" data-toggle="modal" data-target="#myModal">
+          Bid
+        </button>
           <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -49,6 +49,10 @@
               </div>
             </div>
           </div>
+          <% else %>
+            <button type="button" class="pull-right btn btn-success" id="btn-popup" onClick="notAuthed();" >
+              Login to Bid
+            </button>
         <% end %>
 
       </div>
@@ -119,12 +123,13 @@ $(document).ready(function() {
       method: 'POST'
     }).success(function(data) {
       if(data.notAuth){
-        window.location = "<%= login_path(next_url: url_for(action: params[:action], controller:params[:controller])) %>";
+        notAuthed();
       }
       data.bid = true;
       updateProgress(data);
     });
   });
+
 
   function poll() {
     $.ajax({
@@ -139,4 +144,7 @@ $(document).ready(function() {
   setInterval(poll, 10*1000);
   poll();
 });
+function notAuthed() {
+  window.location = "<%= login_path(next_url: url_for(action: params[:action], controller:params[:controller])) %>";
+}
 </script>
