@@ -22,19 +22,13 @@
           <span class="hamb-bottom"></span>
         </button>
         <div class="container-fluid">
-          <div class="header row vcenter">
-            <div class="col-md-3 col-sm-0"></div>
-            <div class="col-md-6 col-sm-8">
-
-              <div class="row">
-                <div class="title">
-                  <%= link_to root_path do %>
-                    <%= image_tag "rafflr.png", width: 300; %>
-                  <% end %>
-                </div>
-              </div>
-              <%= render 'shared/search_bar' %>
+          <div class="header row">
+            <div class="title" style="display: block;">
+            <%= link_to root_path do %>
+              <%= image_tag "rafflr.png", width: 300; %>
+            <% end %>
             </div>
+            <%= render 'shared/search_bar' %>
           </div>
           <div class="row content-outer">
             <div class="col-xs-0 col-md-1"></div>

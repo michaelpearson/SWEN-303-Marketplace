@@ -1,36 +1,34 @@
-<div class="search-box col-sm-12">
-  <form action="/search" method="get" class="input-group" style="width: 100%;">
-    <div class="row" style="width: 100%;">
-      <div class="input-group col-xs-10 col-sm-12 col-md-12" style="margin: 0;">
-        <%= text_field_tag :query, "Search", placeholder:"Search", value:@search_query, class:"form-control" %>
-        <div class="input-group-btn">
-          <%= select_tag :category, options_for_stock_category(@search_category), class:"form-control" %>
-          <%= button_tag(type:"submit", class:"btn btn-default")do %>
-            Search
-            <i class="glyphicon glyphicon-search"></i>
-          <% end %>
-        </div>
-        </input>
+<div style="display: inline-block; width: 50%; max-width: 900px; min-width: 350px;">
+  <form action="/search" method="get">
+    <div class="input-group" style="">
+      <%= text_field_tag :query, "Search", placeholder:"Search", value:@search_query, class:"form-control" %>
+      <div class="input-group-btn" style="width: 100px;">
+        <%= select_tag :category, options_for_stock_category(@search_category), class:"form-control" %>
       </div>
-
-      <div class="col-xs-12 col-md-12 col-sm-12">
-        <div class="btn-group" style="margin: 0; margin-top: 10px;">
-          <%= link_to_unless(logged_in?, "Sign up", signup_path, class: "btn btn-primary") do %>
-            <%= link_to redeem_tokens_url,  class:"btn btn-info" do %>
-              Token Count: <span id="token-count" class="badge"><%= current_user.token_count %></span>
-            <% end %>
-          <%= link_to myrafflr_history_path(type: "notifications"), class:"btn btn-warning" do %>
-            Notifications <span id="token-count" class="badge"><%= current_user.notification_count %></span>
-          <% end %>
-            <%= link_to "My Account", myrafflr_path, class: "btn btn-primary" %>
-          <%  end %>
-          <%=
-            link_to_unless(logged_in?, "Log in", login_path(next_url: url_for(action: params[:action], controller:params[:controller])) , class: "btn btn-success") do
-              link_to "Log out", logout_path, class: "btn btn-success"
-            end
-          %>
-      </div>
+      <div class="input-group-btn">
+        <%= button_tag(type:"submit", class:"btn btn-default")do %>
+          Search
+          <i class="glyphicon glyphicon-search"></i>
+        <% end %>
       </div>
     </div>
   </form>
+</div>
+<div style="width: 100%; text-align: center">
+  <p style="padding-bottom: 20px; line-height: 60px;">
+  <%= link_to_unless(logged_in?, "Sign up", signup_path, class: "btn btn-primary") do %>
+      <%= link_to redeem_tokens_url,  class:"btn btn-info" do %>
+          Token Count: <span id="token-count" class="badge"><%= current_user.token_count %></span>
+      <% end %>
+      <%= link_to myrafflr_history_path(type: "notifications"), class:"btn btn-warning" do %>
+          Notifications <span id="token-count" class="badge"><%= current_user.notification_count %></span>
+      <% end %>
+      <%= link_to "My Account", myrafflr_path, class: "btn btn-primary" %>
+  <%  end %>
+  <%=
+    link_to_unless(logged_in?, "Log in", login_path(next_url: url_for(action: params[:action], controller:params[:controller])) , class: "btn btn-success") do
+      link_to "Log out", logout_path, class: "btn btn-success"
+    end
+  %>
+  </p>
 </div>
