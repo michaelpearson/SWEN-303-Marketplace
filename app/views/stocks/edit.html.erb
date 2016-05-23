@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-  <%= form_for :stock, url: stocks_path, html: { multipart: true, class: "form-horizontal panel-body" } do |f| %>
+  <%= form_for @stock, html: { multipart: true, class: "form-horizontal panel-body" } do |f| %>
     <div class="col-sm-4">
       <div class="form-group">
         <%= f.label :label, {class: "form-label"}%>
