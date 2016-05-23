@@ -7,6 +7,7 @@
        aria-valuemax="<%= stock.price %>"
        style="width: <%= stock.percentage_complete_from(current_user) %>%;">
        <span class="sr-only"><%= stock.percentage_complete_from(current_user) %>% Complete</span>
+       Your tickets
   </div>
   <div id="token-progress"
        role="progressbar"
@@ -16,5 +17,6 @@
        class="progress-bar progress-bar-warning progress-bar-striped"
        style="width: <%= stock.percentage_complete - stock.percentage_complete_from(current_user) %>%">
        <span class="sr-only"><%= (stock.percentage_complete - stock.percentage_complete_from(current_user)) %>% Complete</span>
+       Other's tickets
   </div>
 </div>

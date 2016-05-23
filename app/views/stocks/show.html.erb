@@ -5,7 +5,12 @@
 
 <div class="row">
   <div class="col-md-6">
-    <h2>Total Tokens Needed: <%= @stock.price %></h2>
+    <h2>There are <span id="current-cont"><%= @stock.bid_count %></span>/<%= @stock.price %> tickets allocated.
+      <br />
+      <% if current_user %>
+        You have <span id="owned-cont"><%= @stock.bids_from(current_user) %></span> tickets
+    <% end %>
+    </h2>
     <%= render 'shared/progress_bar', stock: @stock %>
     <p class="lead"><%= simple_format @stock.description %></p>
 
@@ -22,18 +27,19 @@
         <!-- Modal -->
         <% if current_user %>
         <button type="button" class="pull-right btn btn-success" id="btn-popup" data-toggle="modal" data-target="#myModal">
-          Bid
+          Buy ticket
         </button>
           <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Bid confirmation</h4>
+                  <h4 class="modal-title" id="myModalLabel">Enter Raffle confirmation</h4>
                 </div>
                 <div class="modal-body">
                   <% if current_user.token_count > 0 %>
-                    Are you sure you want to bid on <%= @stock.label %>
+                    Are you sure you want to enter the <%= @stock.label %> raffle?
+                    This will cost you one token.
                 <% else %>
                   Sorry you don't have any tokens left, purchase more tokens now!
                 <% end %>
@@ -41,7 +47,7 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   <% if current_user.token_count > 0 %>
-                    <button class="pull-right btn btn-success" id="btn-bid" data-dismiss="modal">Bid</button>
+                    <button class="pull-right btn btn-success" id="btn-bid" data-dismiss="modal">Buy Ticket</button>
                   <% else %>
                     <%= link_to "purchase more tokens", redeem_tokens_url, class: "btn btn-primary" %>
                   <% end %>
@@ -51,7 +57,7 @@
           </div>
           <% else %>
             <button type="button" class="pull-right btn btn-success" id="btn-popup" onClick="notAuthed();" >
-              Login to Bid
+              Login to enter raffle
             </button>
         <% end %>
 
@@ -73,7 +79,9 @@ $(document).ready(function() {
     var $own = $('#token-owned-progress');
     var $bidbtn = $('#btn-bid');
     var $popupbtn = $('#btn-popup')
-      var $tokenCount = $('#token-count');
+    var $tokenCount = $('#token-count');
+    var $currnetCount = $('#current-cont');
+    var $ownedCount = $('#owned-cont');
 
     var now = parseInt(update.current_value);
     var nowOwned = parseInt(update.user_value);
@@ -81,6 +89,8 @@ $(document).ready(function() {
 
     var owned = (nowOwned / total * 100);
     $prog.attr('aria-valuenow', now);
+    $currnetCount.text(now);
+    $ownedCount.text(nowOwned);
     $own.attr('aria-valuenow', nowOwned);
     $prog.css('width', ((now / total * 100) - owned) + "%");
     $own.css('width', owned + "%");
