@@ -15,9 +15,14 @@ class SendPush
         :registration_ids => [authentication]
     }
 
+    key = ENV['API_KEY']
+    if key.nil?
+      key = File.read("#{Rails.root.to_s}/config/apikey");
+    end
 
     http = Curl.post(GOOGLE_GMS_LINK, post_data.to_json) do |http|
-      http.headers['authorization'] = "key=AIzaSyB3a8trJ7VFsJexj4QijSO9w8zMXLz7RP8"
+
+      http.headers['authorization'] = "key=#{key}"
       http.headers['Content-Type'] = 'Application/json'
     end
     puts("Endpoint: #{GOOGLE_GMS_LINK}")
