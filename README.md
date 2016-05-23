@@ -1,24 +1,23 @@
-# README
+#README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Our take on an online marketplace, project for SWEN303 2016
+University of Victoria, Wellington
 
-Things you may want to cover:
+###Team members
+* David Barnett
+* Jun Burden
+* Michael Pearson
+* Tana Tanoi
 
-* Ruby version
+Ruby version: 2.3
+Rails version: 5.0.0.beta4
 
-* System dependencies
+###System depenencies
+* imagemagick
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+###Deployment instructions
+1. Clone the repository
+2. Add environment variable for the google api
+3. Run 'bundle install'
+4. Run 'bundle exec rake db:setup'
+5. Run 'bundle exec rails server'
