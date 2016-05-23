@@ -18,22 +18,22 @@ users = User.create([
 stocks = [
   [users[1], "Camera",  12, ["camera.jpg"], "#{PREFIX} Camera. #{LOREM}", "Misc"],
   [users[1], "Hat",  30, ["hat.jpg"], "#{PREFIX} Hat. #{LOREM}", "Misc"],
-  [users[2], "Bald Eagle",  35, ["bald-eagle.jpg"], "#{PREFIX} Bald Eagle. #{LOREM}", "Animal"],
-  [users[2], "Kiwi",  80, ["kiwi.jpg"], "#{PREFIX} Kiwi. #{LOREM}", "Animal"],
-  [users[3], "Snakes and Ladders",  1, ["snakes-ladders.jpg"], "#{PREFIX} Snakes and Ladders. #{LOREM}", "Game"],
-  [users[3], "Monopoly",  3, ["monopoly.jpg"], "#{PREFIX} Monopoly. #{LOREM}", "Game"],
-  [users[4], "Holy Grail",  100, ["holy-grail.jpg"], "#{PREFIX} Holy Grail. #{LOREM}", "Misc"],
-  [users[5], "Meaning of Life",  42, ["meaning-of-life.jpg"], "#{PREFIX} Meaning of Life. #{LOREM}", "Misc"],
-  [users[5], "Cactus",  15, ["cactus.jpg"], "#{PREFIX} Cactus. #{LOREM}", "Plant"],
-  [users[5], "Iris",  8, ["iris.jpg"], "#{PREFIX} Iris. #{LOREM}", "Plant"],
-  [users[6], "Knives",  10, ["knives-1.jpg", "knives-2.jpg", "knives-3.jpg", "knives-4.jpg"], "#{PREFIX} Knives. #{LOREM}", "Weapon"],
-  [users[6], "Sword",  35, ["sword.jpg"], "#{PREFIX} Sword. #{LOREM}", "Weapon"],
-  [users[7], "Kryptonite",  10, ["kryptonite.jpg"], "#{PREFIX} Kryptonite. #{LOREM}", "Weapon"],
-  [users[7], "S Clothing Patch",  5, ["s-patch.jpg"], "#{PREFIX} S Clothing Patch. #{LOREM}", "Clothing"],
-  [users[8], "Table",  10, ["table.jpg"], "#{PREFIX} Table. #{LOREM}", "Furniture"],
-  [users[9], "Small Chair",  30, ["chair.jpg"], "#{PREFIX} Small Chair. #{LOREM}", "Furniture"],
-  [users[10], "Coffee",  4, ["coffee.jpg"], "#{PREFIX} Coffee. #{LOREM}", "Food"],
-  [users[10], "Muffin",  3, ["muffin.jpg"], "#{PREFIX} Muffin. #{LOREM}", "Food"]
+  [users[1], "Bald Eagle",  35, ["bald-eagle.jpg"], "#{PREFIX} Bald Eagle. #{LOREM}", "Animal"],
+  [users[1], "Kiwi",  80, ["kiwi.jpg"], "#{PREFIX} Kiwi. #{LOREM}", "Animal"],
+  [users[1], "Snakes and Ladders",  1, ["snakes-ladders.jpg"], "#{PREFIX} Snakes and Ladders. #{LOREM}", "Game"],
+  [users[1], "Monopoly",  3, ["monopoly.jpg"], "#{PREFIX} Monopoly. #{LOREM}", "Game"],
+  [users[1], "Holy Grail",  100, ["holy-grail.jpg"], "#{PREFIX} Holy Grail. #{LOREM}", "Misc"],
+  [users[2], "Meaning of Life",  42, ["meaning-of-life.jpg"], "#{PREFIX} Meaning of Life. #{LOREM}", "Misc"],
+  [users[2], "Cactus",  15, ["cactus.jpg"], "#{PREFIX} Cactus. #{LOREM}", "Plant"],
+  [users[2], "Iris",  8, ["iris.jpg"], "#{PREFIX} Iris. #{LOREM}", "Plant"],
+  [users[2], "Knives",  10, ["knives-1.jpg", "knives-2.jpg", "knives-3.jpg", "knives-4.jpg"], "#{PREFIX} Knives. #{LOREM}", "Weapon"],
+  [users[2], "Sword",  35, ["sword.jpg"], "#{PREFIX} Sword. #{LOREM}", "Weapon"],
+  [users[2], "Kryptonite",  10, ["kryptonite.jpg"], "#{PREFIX} Kryptonite. #{LOREM}", "Weapon"],
+  [users[3], "S Clothing Patch",  5, ["s-patch.jpg"], "#{PREFIX} S Clothing Patch. #{LOREM}", "Clothing"],
+  [users[3], "Table",  10, ["table.jpg"], "#{PREFIX} Table. #{LOREM}", "Furniture"],
+  [users[3], "Small Chair",  30, ["chair.jpg"], "#{PREFIX} Small Chair. #{LOREM}", "Furniture"],
+  [users[3], "Coffee",  4, ["coffee.jpg"], "#{PREFIX} Coffee. #{LOREM}", "Food"],
+  [users[3], "Muffin",  3, ["muffin.jpg"], "#{PREFIX} Muffin. #{LOREM}", "Food"]
 ].map! do |stock|
   Stock.create(
     owner:        stock[0],
@@ -46,7 +46,7 @@ stocks = [
       Photo.create(image: File.open("db/images/#{p}"))
     end
   end
-end if Rails.env == "development"
+end
 
 Transaction.create([
   {stock: stocks[2], user: users[0], kind: "BID"},
@@ -67,4 +67,4 @@ Transaction.create([
   {stock: stocks[2], user: users[10], kind: "BID"},
   {stock: stocks[16], user: users[10], kind: "BID"},
   {stock: stocks[12], user: users[10], kind: "BID"}
-]) if Rails.emv = "development"
+])

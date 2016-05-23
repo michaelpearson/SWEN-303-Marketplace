@@ -6,7 +6,7 @@ class Stock < ApplicationRecord
   DEFAULT_IMAGE_URL = "mock/hidethepain.png"
 
   def self.categories
-    @categories ||= Stock.all.map(&:category).uniq
+    Stock.all.map(&:category).uniq
   end
 
   def bid_count

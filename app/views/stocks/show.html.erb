@@ -38,8 +38,9 @@
                 </div>
                 <div class="modal-body">
                   <% if current_user.token_count > 0 %>
-                    Are you sure you want to enter the <%= @stock.label %> raffle?
-                    This will cost you one token.
+                    <p>You have <%= current_user.token_count %> tokens.</p>
+                    <p>Are you sure you want to enter the <%= @stock.label %> raffle?
+                    This will cost you one token.</p>
                 <% else %>
                   Sorry you don't have any tokens left, purchase more tokens now!
                 <% end %>
