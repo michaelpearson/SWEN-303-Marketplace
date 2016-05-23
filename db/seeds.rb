@@ -46,7 +46,7 @@ stocks = [
       Photo.create(image: File.open("db/images/#{p}"))
     end
   end
-end
+end if Rails.env == "development"
 
 Transaction.create([
   {stock: stocks[2], user: users[0], kind: "BID"},
@@ -67,4 +67,4 @@ Transaction.create([
   {stock: stocks[2], user: users[10], kind: "BID"},
   {stock: stocks[16], user: users[10], kind: "BID"},
   {stock: stocks[12], user: users[10], kind: "BID"}
-])
+]) if Rails.emv = "development"
